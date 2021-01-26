@@ -24,7 +24,6 @@ public class DetailControlActivity extends GSYBaseActivityDetail<StandardGSYVide
     private String url = "http://mp4.vjshi.com/2013-05-28/2013052815051372.mp4";
 
     private SampleControlVideo detailPlayer;
-    private View loadingView;
     private float speed = 1;
 
     @Override
@@ -32,7 +31,6 @@ public class DetailControlActivity extends GSYBaseActivityDetail<StandardGSYVide
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_control);
         detailPlayer = findViewById(R.id.detail_player);
-        loadingView = findViewById(R.id.loadingView);
 
         resolveNormalVideoUI();
         initVideoBuilderMode();
@@ -40,13 +38,6 @@ public class DetailControlActivity extends GSYBaseActivityDetail<StandardGSYVide
         detailPlayer.setLockClickListener(new LockClickListener() {
             @Override
             public void onClick(View view, boolean lock) {
-            }
-        });
-
-        loadingView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //do nothing
             }
         });
     }
