@@ -14,7 +14,6 @@ import com.ymc.videodemo.ijk.listener.GSYVideoShotListener;
 import com.ymc.videodemo.ijk.render.view.GSYVideoGLView;
 import com.ymc.videodemo.ijk.render.view.listener.GLSurfaceListener;
 import com.ymc.videodemo.ijk.render.view.listener.GSYVideoGLRenderErrorListener;
-import com.ymc.videodemo.ijk.utils.Debuger;
 
 import java.nio.IntBuffer;
 
@@ -80,8 +79,6 @@ public abstract class GSYVideoGLViewBaseRender implements GLSurfaceView.Renderer
             GLES20.glGetShaderiv(shader, GLES20.GL_COMPILE_STATUS,
                     compiled, 0);
             if (compiled[0] == 0) {
-                Debuger.printfError("Could not compile shader " + shaderType + ":");
-                Debuger.printfError(GLES20.glGetShaderInfoLog(shader));
                 GLES20.glDeleteShader(shader);
                 shader = 0;
             }
@@ -111,8 +108,6 @@ public abstract class GSYVideoGLViewBaseRender implements GLSurfaceView.Renderer
             GLES20.glGetProgramiv(program, GLES20.GL_LINK_STATUS,
                     linkStatus, 0);
             if (linkStatus[0] != GLES20.GL_TRUE) {
-                Debuger.printfError("Could not link program: ");
-                Debuger.printfError(GLES20.glGetProgramInfoLog(program));
                 GLES20.glDeleteProgram(program);
                 program = 0;
             }
@@ -123,7 +118,6 @@ public abstract class GSYVideoGLViewBaseRender implements GLSurfaceView.Renderer
     protected void checkGlError(final String op) {
         final int error;
         if ((error = GLES20.glGetError()) != GLES20.GL_NO_ERROR) {
-            Debuger.printfError(op + ": glError " + error);
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {

@@ -15,7 +15,6 @@ import com.ymc.videodemo.ijk.listener.GSYVideoShotSaveListener;
 import com.ymc.videodemo.ijk.render.GSYRenderView;
 import com.ymc.videodemo.ijk.render.glrender.GSYVideoGLViewBaseRender;
 import com.ymc.videodemo.ijk.render.view.listener.IGSYSurfaceListener;
-import com.ymc.videodemo.ijk.utils.Debuger;
 import com.ymc.videodemo.ijk.utils.FileUtils;
 import com.ymc.videodemo.ijk.utils.GSYVideoType;
 import com.ymc.videodemo.ijk.utils.MeasureHelper;
@@ -199,22 +198,18 @@ public class GSYTextureView extends TextureView implements TextureView.SurfaceTe
 
     @Override
     public void onRenderResume() {
-        Debuger.printfLog(getClass().getSimpleName() + " not support onRenderResume now");
     }
 
     @Override
     public void onRenderPause() {
-        Debuger.printfLog(getClass().getSimpleName() + " not support onRenderPause now");
     }
 
     @Override
     public void releaseRenderAll() {
-        Debuger.printfLog(getClass().getSimpleName() + " not support releaseRenderAll now");
     }
 
     @Override
     public void setRenderMode(int mode) {
-        Debuger.printfLog(getClass().getSimpleName() + " not support setRenderMode now");
     }
 
     @Override
@@ -224,12 +219,10 @@ public class GSYTextureView extends TextureView implements TextureView.SurfaceTe
 
     @Override
     public void setGLRenderer(GSYVideoGLViewBaseRender renderer) {
-        Debuger.printfLog(getClass().getSimpleName() + " not support setGLRenderer now");
     }
 
     @Override
     public void setGLMVPMatrix(float[] MVPMatrix) {
-        Debuger.printfLog(getClass().getSimpleName() + " not support setGLMVPMatrix now");
     }
 
     /**
@@ -237,7 +230,6 @@ public class GSYTextureView extends TextureView implements TextureView.SurfaceTe
      */
     @Override
     public void setGLEffectFilter(GSYVideoGLView.ShaderInterface effectFilter) {
-        Debuger.printfLog(getClass().getSimpleName() + " not support setGLEffectFilter now");
     }
 
 

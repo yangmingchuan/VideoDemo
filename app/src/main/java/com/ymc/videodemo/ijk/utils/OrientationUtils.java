@@ -193,7 +193,6 @@ public class OrientationUtils {
             activity.setRequestedOrientation(requestedOrientation);
         } catch (IllegalStateException exception) {
             if (Build.VERSION.SDK_INT == Build.VERSION_CODES.O || Build.VERSION.SDK_INT == Build.VERSION_CODES.O_MR1) {
-                Debuger.printfError("OrientationUtils", exception);
             } else {
                 exception.printStackTrace();
             }

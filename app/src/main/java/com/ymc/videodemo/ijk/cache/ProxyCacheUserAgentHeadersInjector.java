@@ -1,7 +1,6 @@
 package com.ymc.videodemo.ijk.cache;
 
 
-import com.ymc.videodemo.ijk.utils.Debuger;
 import com.ymc.videodemo.videocache.headers.HeaderInjector;
 
 import java.util.HashMap;
@@ -16,7 +15,6 @@ public class ProxyCacheUserAgentHeadersInjector implements HeaderInjector {
 
     @Override
     public Map<String, String> addHeaders(String url) {
-        Debuger.printfLog("****** proxy addHeaders ****** " + mMapHeadData.size());
         return mMapHeadData;
     }
 }

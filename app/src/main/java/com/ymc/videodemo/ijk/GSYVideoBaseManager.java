@@ -20,7 +20,6 @@ import com.ymc.videodemo.ijk.base.player.IPlayerManager;
 import com.ymc.videodemo.ijk.cache.CacheFactory;
 import com.ymc.videodemo.ijk.listener.GSYMediaPlayerListener;
 import com.ymc.videodemo.ijk.player.PlayerFactory;
-import com.ymc.videodemo.ijk.utils.Debuger;
 import com.ymc.videodemo.ijk.video.base.GSYVideoViewBridge;
 
 import java.io.File;
@@ -39,8 +38,6 @@ import tv.danmaku.ijk.media.player.IMediaPlayer;
 public abstract class GSYVideoBaseManager implements IMediaPlayer.OnPreparedListener, IMediaPlayer.OnCompletionListener,
         IMediaPlayer.OnBufferingUpdateListener, IMediaPlayer.OnSeekCompleteListener, IMediaPlayer.OnErrorListener,
         IMediaPlayer.OnVideoSizeChangedListener, IMediaPlayer.OnInfoListener, ICacheManager.ICacheAvailableListener, GSYVideoViewBridge {
-
-    public static String TAG = "GSYVideoBaseManager";
 
     protected static final int HANDLER_PREPARE = 0;
 
@@ -629,7 +626,6 @@ public abstract class GSYVideoBaseManager implements IMediaPlayer.OnPreparedList
      */
     protected void startTimeOutBuffer() {
         // 启动定时
-        Debuger.printfError("startTimeOutBuffer");
         mainThreadHandler.postDelayed(mTimeOutRunnable, timeOut);
 
     }
@@ -638,7 +634,6 @@ public abstract class GSYVideoBaseManager implements IMediaPlayer.OnPreparedList
      取消 十秒的定时器进行 缓存操作
      */
     protected void cancelTimeOutBuffer() {
-        Debuger.printfError("cancelTimeOutBuffer");
         // 取消定时
         if (needTimeOutOther)
             mainThreadHandler.removeCallbacks(mTimeOutRunnable);
@@ -649,7 +644,6 @@ public abstract class GSYVideoBaseManager implements IMediaPlayer.OnPreparedList
         @Override
         public void run() {
             if (listener != null) {
-                Debuger.printfError("time out for error listener");
                 listener().onError(BUFFER_TIME_OUT_ERROR, BUFFER_TIME_OUT_ERROR);
             }
         }

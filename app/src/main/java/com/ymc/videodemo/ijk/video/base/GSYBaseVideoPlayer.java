@@ -19,7 +19,6 @@ import android.widget.FrameLayout;
 
 import com.ymc.videodemo.R;
 import com.ymc.videodemo.ijk.utils.CommonUtil;
-import com.ymc.videodemo.ijk.utils.Debuger;
 import com.ymc.videodemo.ijk.utils.OrientationOption;
 import com.ymc.videodemo.ijk.utils.OrientationUtils;
 import com.ymc.videodemo.ijk.view.SmallVideoTouch;
@@ -206,7 +205,6 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
             int actionBerH = getActionBarHeight((Activity) context);
             boolean isTranslucent = ((WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS & ((Activity) context).getWindow().getAttributes().flags)
                     == WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            Debuger.printfLog("*************isTranslucent*************** " + isTranslucent);
             if (statusBar && !isTranslucent) {
                 mListItemRect[1] = mListItemRect[1] - statusBarH;
             }
@@ -346,7 +344,6 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
 
 
         if (mVideoAllCallBack != null) {
-            Debuger.printfError("onEnterFullscreen");
             mVideoAllCallBack.onEnterFullscreen(mOriginUrl, mTitle, gsyVideoPlayer);
         }
         mIfCurrentIsFullscreen = true;
@@ -379,7 +376,6 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
         addTextureView();
         mSaveChangeViewTIme = System.currentTimeMillis();
         if (mVideoAllCallBack != null) {
-            Debuger.printfError("onQuitFullscreen");
             mVideoAllCallBack.onQuitFullscreen(mOriginUrl, mTitle, this);
         }
         mIfCurrentIsFullscreen = false;
@@ -502,8 +498,6 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
         boolean isVertical = false;
         int videoHeight = getCurrentVideoHeight();
         int videoWidth = getCurrentVideoWidth();
-        Debuger.printfLog("GSYVideoBase isVerticalVideo  videoHeight " + videoHeight + " videoWidth " + videoWidth);
-        Debuger.printfLog("GSYVideoBase isVerticalVideo  mRotate " + mRotate);
         if (videoHeight > 0 && videoWidth > 0) {
             if (mRotate == 90 || mRotate == 270) {
                 isVertical = videoWidth > videoHeight;
@@ -532,7 +526,6 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
         if (mIfCurrentIsFullscreen) {
             //确保开启竖屏检测的时候正常全屏
             boolean isV = isVerticalFullByVideoSize();
-            Debuger.printfLog("GSYVideoBase onPrepared isVerticalFullByVideoSize " + isV);
             if (isV) {
                 if (mOrientationUtils != null) {
                     mOrientationUtils.backToProtVideo();
@@ -796,7 +789,6 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
             getGSYVideoManager().setLastListener(this);
             getGSYVideoManager().setListener(gsyVideoPlayer);
             if (mVideoAllCallBack != null) {
-                Debuger.printfError("onEnterSmallWidget");
                 mVideoAllCallBack.onEnterSmallWidget(mOriginUrl, mTitle, gsyVideoPlayer);
             }
 
@@ -825,7 +817,6 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
         addTextureView();
         mSaveChangeViewTIme = System.currentTimeMillis();
         if (mVideoAllCallBack != null) {
-            Debuger.printfLog("onQuitSmallWidget");
             mVideoAllCallBack.onQuitSmallWidget(mOriginUrl, mTitle, this);
         }
     }
@@ -1041,9 +1032,7 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
             //如果系统没有将布局下移，那么此时处理
             if (location[1] == 0) {
                 setPadding(0, getStatusBarHeight(context), 0, 0);
-                Debuger.printfLog("竖屏，系统未将布局下移");
             } else {
-                Debuger.printfLog("竖屏，系统将布局下移；y:" + location[1]);
             }
         }
     }

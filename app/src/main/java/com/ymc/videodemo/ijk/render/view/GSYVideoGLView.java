@@ -19,7 +19,6 @@ import com.ymc.videodemo.ijk.render.glrender.GSYVideoGLViewSimpleRender;
 import com.ymc.videodemo.ijk.render.view.listener.GLSurfaceListener;
 import com.ymc.videodemo.ijk.render.view.listener.GSYVideoGLRenderErrorListener;
 import com.ymc.videodemo.ijk.render.view.listener.IGSYSurfaceListener;
-import com.ymc.videodemo.ijk.utils.Debuger;
 import com.ymc.videodemo.ijk.utils.FileUtils;
 import com.ymc.videodemo.ijk.utils.MeasureHelper;
 
@@ -134,13 +133,11 @@ public class GSYVideoGLView extends GLSurfaceView implements GLSurfaceListener, 
 
     @Override
     public Bitmap initCover() {
-        Debuger.printfLog(getClass().getSimpleName() + " not support initCover now");
         return null;
     }
 
     @Override
     public Bitmap initCoverHigh() {
-        Debuger.printfLog(getClass().getSimpleName() + " not support initCoverHigh now");
         return null;
     }
 
@@ -214,7 +211,6 @@ public class GSYVideoGLView extends GLSurfaceView implements GLSurfaceListener, 
 
     @Override
     public void setRenderTransform(Matrix transform) {
-        Debuger.printfLog(getClass().getSimpleName() + " not support setRenderTransform now");
     }
 
     @Override

@@ -128,7 +128,6 @@ public class GifCreateHelper {
             public void result(boolean success, final File file) {
                 mSaveShotBitmapSuccess = true;
                 if (success) {
-                    Debuger.printfError(" SUCCESS CREATE FILE " + file.getAbsolutePath());
                     mPicList.add(file.getAbsolutePath());
                 }
             }

@@ -25,7 +25,6 @@ import com.ymc.videodemo.R;
 import com.ymc.videodemo.ijk.listener.GSYMediaPlayerListener;
 import com.ymc.videodemo.ijk.listener.VideoAllCallBack;
 import com.ymc.videodemo.ijk.utils.CommonUtil;
-import com.ymc.videodemo.ijk.utils.Debuger;
 import com.ymc.videodemo.ijk.utils.NetInfoModule;
 
 import java.io.File;
@@ -285,13 +284,6 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
             View.inflate(context, getLayoutId(), this);
         } catch (InflateException e) {
             if (e.toString().contains("GSYImageCover")) {
-                Debuger.printfError("********************\n" +
-                        "*****   注意   *****" +
-                        "********************\n" +
-                        "*该版本需要清除布局文件中的GSYImageCover\n" +
-                        "****  Attention  ***\n" +
-                        "*Please remove GSYImageCover from Layout in this Version\n" +
-                        "********************\n");
                 e.printStackTrace();
                 throw new InflateException("该版本需要清除布局文件中的GSYImageCover，please remove GSYImageCover from your layout");
             } else {
@@ -306,10 +298,8 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
     protected void startButtonLogic() {
         if (mVideoAllCallBack != null && (mCurrentState == CURRENT_STATE_NORMAL
                 || mCurrentState == CURRENT_STATE_AUTO_COMPLETE)) {
-            Debuger.printfLog("onClickStartIcon");
             mVideoAllCallBack.onClickStartIcon(mOriginUrl, mTitle, this);
         } else if (mVideoAllCallBack != null) {
-            Debuger.printfLog("onClickStartError");
             mVideoAllCallBack.onClickStartError(mOriginUrl, mTitle, this);
         }
         prepareVideo();
@@ -327,7 +317,6 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
             getGSYVideoManager().listener().onCompletion();
         }
         if (mVideoAllCallBack != null) {
-            Debuger.printfLog("onStartPrepared");
             mVideoAllCallBack.onStartPrepared(mOriginUrl, mTitle, this);
         }
         getGSYVideoManager().setListener(this);
@@ -555,7 +544,6 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
      */
     protected void netWorkErrorLogic() {
         final long currentPosition = getCurrentPositionWhenPlaying();
-        Debuger.printfError("******* Net State Changed. renew player to connect *******" + currentPosition);
         getGSYVideoManager().releaseMediaPlayer();
         postDelayed(new Runnable() {
             @Override
@@ -572,9 +560,7 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
      */
     protected void deleteCacheFileWhenError() {
         clearCurrentCache();
-        Debuger.printfError("Link Or mCache Error, Please Try Again " + mOriginUrl);
         if (mCache) {
-            Debuger.printfError("mCache Link " + mUrl);
         }
         mUrl = mOriginUrl;
     }
@@ -587,7 +573,6 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
         mHadPrepared = true;
 
         if (mVideoAllCallBack != null && isCurrentMediaListener()) {
-            Debuger.printfLog("onPrepared");
             mVideoAllCallBack.onPrepared(mOriginUrl, mTitle, this);
         }
 
@@ -624,7 +609,6 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
         releaseNetWorkState();
 
         if (mVideoAllCallBack != null && isCurrentMediaListener()) {
-            Debuger.printfLog("onAutoComplete");
             mVideoAllCallBack.onAutoComplete(mOriginUrl, mTitle, this);
         }
         mHadPlay = false;
@@ -661,7 +645,6 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
         releaseNetWorkState();
 
         if (mVideoAllCallBack != null) {
-            Debuger.printfLog("onComplete");
             mVideoAllCallBack.onComplete(mOriginUrl, mTitle, this);
         }
 
@@ -670,7 +653,6 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
 
     @Override
     public void onSeekComplete() {
-        Debuger.printfLog("onSeekComplete");
     }
 
     @Override
@@ -714,7 +696,6 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
             }
         } else if (what == getGSYVideoManager().getRotateInfoFlag()) {
             mRotate = extra;
-            Debuger.printfLog("Video Rotate Info " + extra);
             if (mTextureView != null)
                 mTextureView.setRotation(mRotate);
         }
@@ -744,8 +725,6 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
      */
     public void clearCurrentCache() {
         if (getGSYVideoManager().isCacheFile() && mCache) {
-            //是否为缓存文件
-            Debuger.printfError("Play Error " + mUrl);
             mUrl = mOriginUrl;
             getGSYVideoManager().clearCache(mContext, mCachePath, mOriginUrl);
         } else if (mUrl.contains("127.0.0.1")) {
@@ -854,7 +833,6 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
                 @Override
                 public void changed(String state) {
                     if (!mNetSate.equals(state)) {
-                        Debuger.printfError("******* change network state ******* " + state);
                         mNetChanged = true;
                     }
                     mNetSate = state;

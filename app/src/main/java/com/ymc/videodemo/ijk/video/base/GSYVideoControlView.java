@@ -27,7 +27,6 @@ import com.ymc.videodemo.ijk.listener.GSYStateUiListener;
 import com.ymc.videodemo.ijk.listener.GSYVideoProgressListener;
 import com.ymc.videodemo.ijk.listener.LockClickListener;
 import com.ymc.videodemo.ijk.utils.CommonUtil;
-import com.ymc.videodemo.ijk.utils.Debuger;
 
 import java.io.File;
 import java.util.Map;
@@ -276,7 +275,6 @@ public abstract class GSYVideoControlView extends GSYVideoView implements View.O
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
 
-        Debuger.printfLog(GSYVideoControlView.this.hashCode() + "------------------------------ dismiss onDetachedFromWindow");
         cancelProgressTimer();
         cancelDismissControlViewTimer();
     }
@@ -315,7 +313,6 @@ public abstract class GSYVideoControlView extends GSYVideoView implements View.O
         switch (mCurrentState) {
             case CURRENT_STATE_NORMAL:
                 if (isCurrentMediaListener()) {
-                    Debuger.printfLog(GSYVideoControlView.this.hashCode() + "------------------------------ dismiss CURRENT_STATE_NORMAL");
                     cancelProgressTimer();
                     getGSYVideoManager().releaseMediaPlayer();
                     releasePauseCover();
@@ -332,12 +329,10 @@ public abstract class GSYVideoControlView extends GSYVideoView implements View.O
                 break;
             case CURRENT_STATE_PLAYING:
                 if (isCurrentMediaListener()) {
-                    Debuger.printfLog(GSYVideoControlView.this.hashCode() + "------------------------------ CURRENT_STATE_PLAYING");
                     startProgressTimer();
                 }
                 break;
             case CURRENT_STATE_PAUSE:
-                Debuger.printfLog(GSYVideoControlView.this.hashCode() + "------------------------------ CURRENT_STATE_PAUSE");
                 startProgressTimer();
                 break;
             case CURRENT_STATE_ERROR:
@@ -346,7 +341,6 @@ public abstract class GSYVideoControlView extends GSYVideoView implements View.O
                 }
                 break;
             case CURRENT_STATE_AUTO_COMPLETE:
-                Debuger.printfLog(GSYVideoControlView.this.hashCode() + "------------------------------ dismiss CURRENT_STATE_AUTO_COMPLETE");
                 cancelProgressTimer();
                 if (mProgressBar != null) {
                     mProgressBar.setProgress(100);
@@ -385,7 +379,6 @@ public abstract class GSYVideoControlView extends GSYVideoView implements View.O
             clickStartIcon();
         } else if (i == R.id.surface_container && mCurrentState == CURRENT_STATE_ERROR) {
             if (mVideoAllCallBack != null) {
-                Debuger.printfLog("onClickStartError");
                 mVideoAllCallBack.onClickStartError(mOriginUrl, mTitle, this);
             }
             prepareVideo();
@@ -394,7 +387,6 @@ public abstract class GSYVideoControlView extends GSYVideoView implements View.O
                 return;
             }
             if (TextUtils.isEmpty(mUrl)) {
-                Debuger.printfError("********" + getResources().getString(R.string.no_url));
                 //Toast.makeText(getActivityContext(), getResources().getString(R.string.no_url), Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -410,10 +402,8 @@ public abstract class GSYVideoControlView extends GSYVideoView implements View.O
         } else if (i == R.id.surface_container) {
             if (mVideoAllCallBack != null && isCurrentMediaListener()) {
                 if (mIfCurrentIsFullscreen) {
-                    Debuger.printfLog("onClickBlankFullscreen");
                     mVideoAllCallBack.onClickBlankFullscreen(mOriginUrl, mTitle, GSYVideoControlView.this);
                 } else {
-                    Debuger.printfLog("onClickBlank");
                     mVideoAllCallBack.onClickBlank(mOriginUrl, mTitle, GSYVideoControlView.this);
                 }
             }
@@ -494,9 +484,6 @@ public abstract class GSYVideoControlView extends GSYVideoView implements View.O
 
                     touchSurfaceUp();
 
-
-                    Debuger.printfLog(GSYVideoControlView.this.hashCode() + "------------------------------ surface_container ACTION_UP");
-
                     startProgressTimer();
 
                     //不要和隐藏虚拟按键后，滑出虚拟按键冲突
@@ -521,7 +508,6 @@ public abstract class GSYVideoControlView extends GSYVideoView implements View.O
                 case MotionEvent.ACTION_UP:
                     startDismissControlViewTimer();
 
-                    Debuger.printfLog(GSYVideoControlView.this.hashCode() + "------------------------------ progress ACTION_UP");
                     startProgressTimer();
                     ViewParent vpup = getParent();
                     while (vpup != null) {
@@ -594,10 +580,8 @@ public abstract class GSYVideoControlView extends GSYVideoView implements View.O
     public void onStopTrackingTouch(SeekBar seekBar) {
         if (mVideoAllCallBack != null && isCurrentMediaListener()) {
             if (isIfCurrentIsFullscreen()) {
-                Debuger.printfLog("onClickSeekbarFullscreen");
                 mVideoAllCallBack.onClickSeekbarFullscreen(mOriginUrl, mTitle, this);
             } else {
-                Debuger.printfLog("onClickSeekbar");
                 mVideoAllCallBack.onClickSeekbar(mOriginUrl, mTitle, this);
             }
         }
@@ -606,7 +590,6 @@ public abstract class GSYVideoControlView extends GSYVideoView implements View.O
                 int time = seekBar.getProgress() * getDuration() / 100;
                 getGSYVideoManager().seekTo(time);
             } catch (Exception e) {
-                Debuger.printfWarning(e.toString());
             }
         }
         mHadSeekTouch = false;
@@ -619,7 +602,6 @@ public abstract class GSYVideoControlView extends GSYVideoView implements View.O
         if (mCurrentState != CURRENT_STATE_PREPAREING) return;
         startProgressTimer();
 
-        Debuger.printfLog(GSYVideoControlView.this.hashCode() + "------------------------------ surface_container onPrepared");
     }
 
 
@@ -632,7 +614,6 @@ public abstract class GSYVideoControlView extends GSYVideoView implements View.O
                     if (percent != 0) {
                         setTextAndProgress(percent);
                         mBufferPoint = percent;
-                        Debuger.printfLog("Net speed: " + getNetSpeedText() + " percent " + percent);
                     }
                     if (mProgressBar == null) {
                         return;
@@ -770,17 +751,14 @@ public abstract class GSYVideoControlView extends GSYVideoView implements View.O
                 mProgressBar.setProgress(progress);
             }
             if (mVideoAllCallBack != null && isCurrentMediaListener()) {
-                Debuger.printfLog("onTouchScreenSeekPosition");
                 mVideoAllCallBack.onTouchScreenSeekPosition(mOriginUrl, mTitle, this);
             }
         } else if (mBrightness) {
             if (mVideoAllCallBack != null && isCurrentMediaListener()) {
-                Debuger.printfLog("onTouchScreenSeekLight");
                 mVideoAllCallBack.onTouchScreenSeekLight(mOriginUrl, mTitle, this);
             }
         } else if (mChangeVolume) {
             if (mVideoAllCallBack != null && isCurrentMediaListener()) {
-                Debuger.printfLog("onTouchScreenSeekVolume");
                 mVideoAllCallBack.onTouchScreenSeekVolume(mOriginUrl, mTitle, this);
             }
         }
@@ -845,7 +823,6 @@ public abstract class GSYVideoControlView extends GSYVideoView implements View.O
      */
     protected void clickStartIcon() {
         if (TextUtils.isEmpty(mUrl)) {
-            Debuger.printfError("********" + getResources().getString(R.string.no_url));
             //Toast.makeText(getActivityContext(), getResources().getString(R.string.no_url), Toast.LENGTH_SHORT).show();
             return;
         }
@@ -864,20 +841,16 @@ public abstract class GSYVideoControlView extends GSYVideoView implements View.O
             setStateAndUi(CURRENT_STATE_PAUSE);
             if (mVideoAllCallBack != null && isCurrentMediaListener()) {
                 if (mIfCurrentIsFullscreen) {
-                    Debuger.printfLog("onClickStopFullscreen");
                     mVideoAllCallBack.onClickStopFullscreen(mOriginUrl, mTitle, this);
                 } else {
-                    Debuger.printfLog("onClickStop");
                     mVideoAllCallBack.onClickStop(mOriginUrl, mTitle, this);
                 }
             }
         } else if (mCurrentState == CURRENT_STATE_PAUSE) {
             if (mVideoAllCallBack != null && isCurrentMediaListener()) {
                 if (mIfCurrentIsFullscreen) {
-                    Debuger.printfLog("onClickResumeFullscreen");
                     mVideoAllCallBack.onClickResumeFullscreen(mOriginUrl, mTitle, this);
                 } else {
-                    Debuger.printfLog("onClickResume");
                     mVideoAllCallBack.onClickResume(mOriginUrl, mTitle, this);
                 }
             }

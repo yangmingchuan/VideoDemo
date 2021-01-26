@@ -14,7 +14,6 @@ import com.ymc.videodemo.ijk.base.cache.ICacheManager;
 import com.ymc.videodemo.ijk.base.model.GSYModel;
 import com.ymc.videodemo.ijk.base.model.VideoOptionModel;
 import com.ymc.videodemo.ijk.base.player.BasePlayerManager;
-import com.ymc.videodemo.ijk.utils.Debuger;
 
 import java.util.List;
 
@@ -254,7 +253,6 @@ public class SystemPlayerManager extends BasePlayerManager {
                     playbackParams.setSpeed(speed);
                     mediaPlayer.getInternalMediaPlayer().setPlaybackParams(playbackParams);
                 } else {
-                    Debuger.printfError(" not support setSpeed");
                 }
             } catch (Exception e) {
                 e.printStackTrace();

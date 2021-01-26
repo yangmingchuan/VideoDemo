@@ -12,7 +12,6 @@ import com.ymc.videodemo.ijk.GSYBaseActivityDetail;
 import com.ymc.videodemo.ijk.builder.GSYVideoOptionBuilder;
 import com.ymc.videodemo.ijk.listener.GSYVideoGifSaveListener;
 import com.ymc.videodemo.ijk.listener.LockClickListener;
-import com.ymc.videodemo.ijk.utils.Debuger;
 import com.ymc.videodemo.ijk.utils.GifCreateHelper;
 import com.ymc.videodemo.ijk.video.StandardGSYVideoPlayer;
 
@@ -151,7 +150,6 @@ public class DetailControlActivity extends GSYBaseActivityDetail<StandardGSYVide
 
             @Override
             public void process(int curPosition, int total) {
-                Debuger.printfError(" current " + curPosition + " total " + total);
             }
         });
     }

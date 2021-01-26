@@ -15,7 +15,6 @@ import com.ymc.videodemo.ijk.base.cache.ICacheManager;
 import com.ymc.videodemo.ijk.base.model.GSYModel;
 import com.ymc.videodemo.ijk.base.model.VideoOptionModel;
 import com.ymc.videodemo.ijk.base.player.BasePlayerManager;
-import com.ymc.videodemo.ijk.utils.Debuger;
 import com.ymc.videodemo.ijk.utils.GSYVideoType;
 import com.ymc.videodemo.ijk.utils.RawDataSourceProvider;
 
@@ -72,7 +71,6 @@ public class IjkPlayerManager extends BasePlayerManager {
         try {
             //开启硬解码
             if (GSYVideoType.isMediaCodec()) {
-                Debuger.printfLog("enable mediaCodec");
                 mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec", 1);
                 mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-auto-rotate", 1);
                 mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-handle-resolution-change", 1);

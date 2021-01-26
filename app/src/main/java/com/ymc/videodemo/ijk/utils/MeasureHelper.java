@@ -237,7 +237,6 @@ public final class MeasureHelper {
             try {
                 int videoWidth = mParamsListener.getCurrentVideoWidth();
                 int videoHeight = mParamsListener.getCurrentVideoHeight();
-                Debuger.printfLog("videoWidth: " + videoWidth + " videoHeight: " + videoHeight);
                 int videoSarNum = mParamsListener.getVideoSarNum();
                 int videoSarDen = mParamsListener.getVideoSarDen();
 
