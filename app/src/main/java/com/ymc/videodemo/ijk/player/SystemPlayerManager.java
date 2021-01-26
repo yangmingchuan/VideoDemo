@@ -11,7 +11,7 @@ import android.view.Surface;
 
 
 import com.ymc.videodemo.ijk.base.cache.ICacheManager;
-import com.ymc.videodemo.ijk.base.model.GSYModel;
+import com.ymc.videodemo.ijk.base.model.IJKModel;
 import com.ymc.videodemo.ijk.base.model.VideoOptionModel;
 import com.ymc.videodemo.ijk.base.player.BasePlayerManager;
 
@@ -52,21 +52,21 @@ public class SystemPlayerManager extends BasePlayerManager {
         mediaPlayer = new AndroidMediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         release = false;
-        GSYModel gsyModel = (GSYModel) msg.obj;
+        IJKModel IJKModel = (IJKModel) msg.obj;
         try {
-            if (gsyModel.isCache() && cacheManager != null) {
-                cacheManager.doCacheLogic(context, mediaPlayer, gsyModel.getUrl(), gsyModel.getMapHeadData(), gsyModel.getCachePath());
+            if (IJKModel.isCache() && cacheManager != null) {
+                cacheManager.doCacheLogic(context, mediaPlayer, IJKModel.getUrl(), IJKModel.getMapHeadData(), IJKModel.getCachePath());
             } else {
-                mediaPlayer.setDataSource(context, Uri.parse(gsyModel.getUrl()), gsyModel.getMapHeadData());
+                mediaPlayer.setDataSource(context, Uri.parse(IJKModel.getUrl()), IJKModel.getMapHeadData());
             }
-            mediaPlayer.setLooping(gsyModel.isLooping());
-            if (gsyModel.getSpeed() != 1 && gsyModel.getSpeed() > 0) {
-                setSpeed(gsyModel.getSpeed());
+            mediaPlayer.setLooping(IJKModel.isLooping());
+            if (IJKModel.getSpeed() != 1 && IJKModel.getSpeed() > 0) {
+                setSpeed(IJKModel.getSpeed());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        initSuccess(gsyModel);
+        initSuccess(IJKModel);
     }
 
     @Override

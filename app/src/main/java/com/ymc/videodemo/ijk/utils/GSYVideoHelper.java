@@ -14,14 +14,14 @@ import android.view.Window;
 import android.widget.FrameLayout;
 
 
-import com.ymc.videodemo.ijk.builder.GSYVideoOptionBuilder;
-import com.ymc.videodemo.ijk.listener.GSYVideoProgressListener;
+import com.ymc.videodemo.ijk.builder.IJKVideoOptionBuilder;
+import com.ymc.videodemo.ijk.listener.IJKVideoProgressListener;
 import com.ymc.videodemo.ijk.listener.LockClickListener;
 import com.ymc.videodemo.ijk.listener.VideoAllCallBack;
-import com.ymc.videodemo.ijk.render.view.GSYVideoGLView;
-import com.ymc.videodemo.ijk.video.StandardGSYVideoPlayer;
-import com.ymc.videodemo.ijk.video.base.GSYBaseVideoPlayer;
-import com.ymc.videodemo.ijk.video.base.GSYVideoPlayer;
+import com.ymc.videodemo.ijk.render.view.IJKVideoGLView;
+import com.ymc.videodemo.ijk.video.StandardIJKVideoPlayer;
+import com.ymc.videodemo.ijk.video.base.IJKBaseVideoPlayer;
+import com.ymc.videodemo.ijk.video.base.IJKVideoPlayer;
 
 import java.io.File;
 import java.util.Map;
@@ -45,7 +45,7 @@ public class GSYVideoHelper {
     /**
      * 播放器
      */
-    private StandardGSYVideoPlayer mGsyVideoPlayer;
+    private StandardIJKVideoPlayer mGsyVideoPlayer;
     /**
      * 全屏承载布局
      */
@@ -109,10 +109,10 @@ public class GSYVideoHelper {
 
 
     public GSYVideoHelper(Context context) {
-        this(context, new StandardGSYVideoPlayer(context));
+        this(context, new StandardIJKVideoPlayer(context));
     }
 
-    public GSYVideoHelper(Context context, StandardGSYVideoPlayer player) {
+    public GSYVideoHelper(Context context, StandardIJKVideoPlayer player) {
         mGsyVideoPlayer = player;
         this.mContext = context;
         this.mWindowViewContainer = (ViewGroup) (CommonUtil.scanForActivity(context)).findViewById(Window.ID_ANDROID_CONTENT);
@@ -213,7 +213,7 @@ public class GSYVideoHelper {
     /**
      * 如果是5.0的，要从原位置过度到全屏位置
      */
-    private void resolveMaterialFullVideoShow(GSYBaseVideoPlayer gsyVideoPlayer) {
+    private void resolveMaterialFullVideoShow(IJKBaseVideoPlayer gsyVideoPlayer) {
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) gsyVideoPlayer.getLayoutParams();
         lp.setMargins(0, 0, 0, 0);
         lp.height = ViewGroup.LayoutParams.MATCH_PARENT;
@@ -268,7 +268,7 @@ public class GSYVideoHelper {
     /**
      * 动画回到正常效果
      */
-    private void resolveMaterialToNormal(final GSYVideoPlayer gsyVideoPlayer) {
+    private void resolveMaterialToNormal(final IJKVideoPlayer gsyVideoPlayer) {
         if (mVideoOptionBuilder.isShowFullAnimation() && mFullViewContainer instanceof FrameLayout) {
             int delay = mOrientationUtils.backToProtVideo();
             mHandler.postDelayed(new Runnable() {
@@ -494,7 +494,7 @@ public class GSYVideoHelper {
      * @param statusBar 是否有状态栏
      */
     public void showSmallVideo(Point size, final boolean actionBar, final boolean statusBar) {
-        if (mGsyVideoPlayer.getCurrentState() == GSYVideoPlayer.CURRENT_STATE_PLAYING) {
+        if (mGsyVideoPlayer.getCurrentState() == IJKVideoPlayer.CURRENT_STATE_PLAYING) {
             mGsyVideoPlayer.showSmallVideo(size, actionBar, statusBar);
             isSmall = true;
         }
@@ -541,7 +541,7 @@ public class GSYVideoHelper {
         this.mVideoOptionBuilder = mVideoOptionBuilder;
     }
 
-    public GSYVideoOptionBuilder getGsyVideoOptionBuilder() {
+    public IJKVideoOptionBuilder getGsyVideoOptionBuilder() {
         return mVideoOptionBuilder;
     }
 
@@ -560,14 +560,14 @@ public class GSYVideoHelper {
     /**
      * 获取播放器,直接拿播放器，根据需要自定义配置
      */
-    public StandardGSYVideoPlayer getGsyVideoPlayer() {
+    public StandardIJKVideoPlayer getGsyVideoPlayer() {
         return mGsyVideoPlayer;
     }
 
     /**
      * 配置
      */
-    public static class GSYVideoHelperBuilder extends GSYVideoOptionBuilder {
+    public static class GSYVideoHelperBuilder extends IJKVideoOptionBuilder {
 
         protected boolean mHideActionBar;
 
@@ -739,12 +739,12 @@ public class GSYVideoHelper {
             return mDialogProgressBarDrawable;
         }
 
-        public GSYVideoGLView.ShaderInterface getEffectFilter() {
+        public IJKVideoGLView.ShaderInterface getEffectFilter() {
             return mEffectFilter;
         }
 
-        public GSYVideoProgressListener getGSYVideoProgressListener() {
-            return mGSYVideoProgressListener;
+        public IJKVideoProgressListener getGSYVideoProgressListener() {
+            return mIJKVideoProgressListener;
         }
     }
 

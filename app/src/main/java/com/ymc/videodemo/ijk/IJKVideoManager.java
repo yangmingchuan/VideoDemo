@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 
 import com.ymc.videodemo.R;
-import com.ymc.videodemo.ijk.listener.GSYMediaPlayerListener;
+import com.ymc.videodemo.ijk.listener.IJKMediaPlayerListener;
 import com.ymc.videodemo.ijk.utils.CommonUtil;
-import com.ymc.videodemo.ijk.video.base.GSYVideoPlayer;
+import com.ymc.videodemo.ijk.video.base.IJKVideoPlayer;
 
 import static com.ymc.videodemo.ijk.utils.CommonUtil.hideNavKey;
 
@@ -21,7 +21,7 @@ import static com.ymc.videodemo.ijk.utils.CommonUtil.hideNavKey;
  * Created by shuyu on 2016/11/11.
  */
 
-public class GSYVideoManager extends GSYVideoBaseManager {
+public class IJKVideoManager extends IJKVideoBaseManager {
 
     public static final int SMALL_ID = R.id.small_id;
 
@@ -30,19 +30,19 @@ public class GSYVideoManager extends GSYVideoBaseManager {
     public static String TAG = "GSYVideoManager";
 
     @SuppressLint("StaticFieldLeak")
-    private static GSYVideoManager videoManager;
+    private static IJKVideoManager videoManager;
 
 
-    private GSYVideoManager() {
+    private IJKVideoManager() {
         init();
     }
 
     /**
      * 单例管理器
      */
-    public static synchronized GSYVideoManager instance() {
+    public static synchronized IJKVideoManager instance() {
         if (videoManager == null) {
-            videoManager = new GSYVideoManager();
+            videoManager = new IJKVideoManager();
         }
         return videoManager;
     }
@@ -50,8 +50,8 @@ public class GSYVideoManager extends GSYVideoBaseManager {
     /**
      * 同步创建一个临时管理器
      */
-    public static synchronized GSYVideoManager tmpInstance(GSYMediaPlayerListener listener) {
-        GSYVideoManager gsyVideoManager = new GSYVideoManager();
+    public static synchronized IJKVideoManager tmpInstance(IJKMediaPlayerListener listener) {
+        IJKVideoManager gsyVideoManager = new IJKVideoManager();
         gsyVideoManager.bufferPoint = videoManager.bufferPoint;
         gsyVideoManager.optionModelList = videoManager.optionModelList;
         gsyVideoManager.playTag = videoManager.playTag;
@@ -70,7 +70,7 @@ public class GSYVideoManager extends GSYVideoBaseManager {
     /**
      * 替换管理器
      */
-    public static synchronized void changeManager(GSYVideoManager gsyVideoManager) {
+    public static synchronized void changeManager(IJKVideoManager gsyVideoManager) {
         videoManager = gsyVideoManager;
     }
 
@@ -87,8 +87,8 @@ public class GSYVideoManager extends GSYVideoBaseManager {
         if (oldF != null) {
             backFrom = true;
             hideNavKey(context);
-            if (GSYVideoManager.instance().lastListener() != null) {
-                GSYVideoManager.instance().lastListener().onBackFullscreen();
+            if (IJKVideoManager.instance().lastListener() != null) {
+                IJKVideoManager.instance().lastListener().onBackFullscreen();
             }
         }
         return backFrom;
@@ -98,10 +98,10 @@ public class GSYVideoManager extends GSYVideoBaseManager {
      * 页面销毁了记得调用是否所有的video
      */
     public static void releaseAllVideos() {
-        if (GSYVideoManager.instance().listener() != null) {
-            GSYVideoManager.instance().listener().onCompletion();
+        if (IJKVideoManager.instance().listener() != null) {
+            IJKVideoManager.instance().listener().onCompletion();
         }
-        GSYVideoManager.instance().releaseMediaPlayer();
+        IJKVideoManager.instance().releaseMediaPlayer();
     }
 
 
@@ -109,8 +109,8 @@ public class GSYVideoManager extends GSYVideoBaseManager {
      * 暂停播放
      */
     public static void onPause() {
-        if (GSYVideoManager.instance().listener() != null) {
-            GSYVideoManager.instance().listener().onVideoPause();
+        if (IJKVideoManager.instance().listener() != null) {
+            IJKVideoManager.instance().listener().onVideoPause();
         }
     }
 
@@ -118,8 +118,8 @@ public class GSYVideoManager extends GSYVideoBaseManager {
      * 恢复播放
      */
     public static void onResume() {
-        if (GSYVideoManager.instance().listener() != null) {
-            GSYVideoManager.instance().listener().onVideoResume();
+        if (IJKVideoManager.instance().listener() != null) {
+            IJKVideoManager.instance().listener().onVideoResume();
         }
     }
 
@@ -130,8 +130,8 @@ public class GSYVideoManager extends GSYVideoBaseManager {
      * @param seek 是否产生seek动作,直播设置为false
      */
     public static void onResume(boolean seek) {
-        if (GSYVideoManager.instance().listener() != null) {
-            GSYVideoManager.instance().listener().onVideoResume(seek);
+        if (IJKVideoManager.instance().listener() != null) {
+            IJKVideoManager.instance().listener().onVideoResume(seek);
         }
     }
 
@@ -144,9 +144,9 @@ public class GSYVideoManager extends GSYVideoBaseManager {
     public static boolean isFullState(Activity activity) {
         ViewGroup vp = (ViewGroup) (CommonUtil.scanForActivity(activity)).findViewById(Window.ID_ANDROID_CONTENT);
         final View full = vp.findViewById(FULLSCREEN_ID);
-        GSYVideoPlayer gsyVideoPlayer = null;
+        IJKVideoPlayer gsyVideoPlayer = null;
         if (full != null) {
-            gsyVideoPlayer = (GSYVideoPlayer) full;
+            gsyVideoPlayer = (IJKVideoPlayer) full;
         }
         return gsyVideoPlayer != null;
     }

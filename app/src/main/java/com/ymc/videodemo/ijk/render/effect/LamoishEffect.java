@@ -5,13 +5,13 @@ import android.opengl.GLSurfaceView;
 
 import java.util.Date;
 import java.util.Random;
-import com.ymc.videodemo.ijk.render.view.GSYVideoGLView;
+import com.ymc.videodemo.ijk.render.view.IJKVideoGLView;
 /**
  * Applies lomo-camera style effect to video.
  *
  * @author sheraz.khilji
  */
-public class LamoishEffect implements GSYVideoGLView.ShaderInterface {
+public class LamoishEffect implements IJKVideoGLView.ShaderInterface {
     private int mWidth;
     private int mHeight;
     private Random mRandom;

@@ -38,7 +38,7 @@ import static com.ymc.videodemo.ijk.utils.CommonUtil.showSupportActionBar;
  * Created by shuyu on 2016/11/17.
  */
 
-public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
+public abstract class IJKBaseVideoPlayer extends IJKVideoControlView {
 
     //保存系统状态ui
     protected int mSystemUiVisibility;
@@ -88,19 +88,19 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
     protected View.OnClickListener mBackFromFullScreenListener;
     protected Handler mInnerHandler = new Handler();
 
-    public GSYBaseVideoPlayer(Context context, Boolean fullFlag) {
+    public IJKBaseVideoPlayer(Context context, Boolean fullFlag) {
         super(context, fullFlag);
     }
 
-    public GSYBaseVideoPlayer(Context context) {
+    public IJKBaseVideoPlayer(Context context) {
         super(context);
     }
 
-    public GSYBaseVideoPlayer(Context context, AttributeSet attrs) {
+    public IJKBaseVideoPlayer(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public GSYBaseVideoPlayer(Context context, AttributeSet attrs, int defStyleAttr) {
+    public IJKBaseVideoPlayer(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -222,7 +222,7 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
      * @param from
      * @param to
      */
-    protected void cloneParams(GSYBaseVideoPlayer from, GSYBaseVideoPlayer to) {
+    protected void cloneParams(IJKBaseVideoPlayer from, IJKBaseVideoPlayer to) {
         to.mHadPlay = from.mHadPlay;
         to.mPlayTag = from.mPlayTag;
         to.mPlayPosition = from.mPlayPosition;
@@ -242,7 +242,7 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
         to.mRenderer = from.mRenderer;
         to.mMode = from.mMode;
         to.mBackFromFullScreenListener = from.mBackFromFullScreenListener;
-        to.mGSYVideoProgressListener = from.mGSYVideoProgressListener;
+        to.mIJKVideoProgressListener = from.mIJKVideoProgressListener;
         to.mHadPrepared = from.mHadPrepared;
         to.mStartAfterPrepared = from.mStartAfterPrepared;
         to.mPauseBeforePrepared = from.mPauseBeforePrepared;
@@ -268,7 +268,7 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
      * 全屏的暂停的时候返回页面不黑色
      */
     private void pauseFullCoverLogic() {
-        if (mCurrentState == GSYVideoPlayer.CURRENT_STATE_PAUSE && mTextureView != null
+        if (mCurrentState == IJKVideoPlayer.CURRENT_STATE_PAUSE && mTextureView != null
                 && (mFullPauseBitmap == null || mFullPauseBitmap.isRecycled()) && mShowPauseCover) {
             try {
                 initCover();
@@ -282,9 +282,9 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
     /**
      * 全屏的暂停返回的时候返回页面不黑色
      */
-    private void pauseFullBackCoverLogic(GSYBaseVideoPlayer gsyVideoPlayer) {
+    private void pauseFullBackCoverLogic(IJKBaseVideoPlayer gsyVideoPlayer) {
         //如果是暂停状态
-        if (gsyVideoPlayer.mCurrentState == GSYVideoPlayer.CURRENT_STATE_PAUSE
+        if (gsyVideoPlayer.mCurrentState == IJKVideoPlayer.CURRENT_STATE_PAUSE
                 && gsyVideoPlayer.mTextureView != null && mShowPauseCover) {
             //全屏的位图还在，说明没播放，直接用原来的
             if (gsyVideoPlayer.mFullPauseBitmap != null
@@ -305,7 +305,7 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
     /**
      * 全屏
      */
-    protected void resolveFullVideoShow(Context context, final GSYBaseVideoPlayer gsyVideoPlayer, final FrameLayout frameLayout) {
+    protected void resolveFullVideoShow(Context context, final IJKBaseVideoPlayer gsyVideoPlayer, final FrameLayout frameLayout) {
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) gsyVideoPlayer.getLayoutParams();
         lp.setMargins(0, 0, 0, 0);
         lp.height = ViewGroup.LayoutParams.MATCH_PARENT;
@@ -356,7 +356,7 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
     /**
      * 恢复
      */
-    protected void resolveNormalVideoShow(View oldF, ViewGroup vp, GSYVideoPlayer gsyVideoPlayer) {
+    protected void resolveNormalVideoShow(View oldF, ViewGroup vp, IJKVideoPlayer gsyVideoPlayer) {
 
         if (oldF != null && oldF.getParent() != null) {
             ViewGroup viewGroup = (ViewGroup) oldF.getParent();
@@ -416,7 +416,7 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
         final View oldF = vp.findViewById(getFullId());
         if (oldF != null) {
             //此处fix bug#265，推出全屏的时候，虚拟按键问题
-            GSYVideoPlayer gsyVideoPlayer = (GSYVideoPlayer) oldF;
+            IJKVideoPlayer gsyVideoPlayer = (IJKVideoPlayer) oldF;
             gsyVideoPlayer.mIfCurrentIsFullscreen = false;
         }
 
@@ -438,9 +438,9 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
         final ViewGroup vp = getViewGroup();
 
         final View oldF = vp.findViewById(getFullId());
-        final GSYVideoPlayer gsyVideoPlayer;
+        final IJKVideoPlayer gsyVideoPlayer;
         if (oldF != null) {
-            gsyVideoPlayer = (GSYVideoPlayer) oldF;
+            gsyVideoPlayer = (IJKVideoPlayer) oldF;
             //如果暂停了
             pauseFullBackCoverLogic(gsyVideoPlayer);
             if (mShowFullAnimation) {
@@ -472,7 +472,7 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
     protected Runnable mCheckoutTask = new Runnable() {
         @Override
         public void run() {
-            GSYVideoPlayer gsyVideoPlayer = getFullWindowPlayer();
+            IJKVideoPlayer gsyVideoPlayer = getFullWindowPlayer();
             if (gsyVideoPlayer != null
                     && gsyVideoPlayer.mCurrentState != mCurrentState) {
                 if (gsyVideoPlayer.mCurrentState == CURRENT_STATE_PLAYING_BUFFERING_START
@@ -605,7 +605,7 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
      * @param statusBar 是否有状态bar，有的话需要隐藏
      */
     @SuppressWarnings("ResourceType, unchecked")
-    public GSYBaseVideoPlayer startWindowFullscreen(final Context context, final boolean actionBar, final boolean statusBar) {
+    public IJKBaseVideoPlayer startWindowFullscreen(final Context context, final boolean actionBar, final boolean statusBar) {
 
 
         mSystemUiVisibility = ((Activity) context).getWindow().getDecorView().getSystemUiVisibility();
@@ -643,20 +643,20 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
         boolean hadNewConstructor = true;
 
         try {
-            GSYBaseVideoPlayer.this.getClass().getConstructor(Context.class, Boolean.class);
+            IJKBaseVideoPlayer.this.getClass().getConstructor(Context.class, Boolean.class);
         } catch (Exception e) {
             hadNewConstructor = false;
         }
 
         try {
             //通过被重载的不同构造器来选择
-            Constructor<GSYBaseVideoPlayer> constructor;
-            final GSYBaseVideoPlayer gsyVideoPlayer;
+            Constructor<IJKBaseVideoPlayer> constructor;
+            final IJKBaseVideoPlayer gsyVideoPlayer;
             if (!hadNewConstructor) {
-                constructor = (Constructor<GSYBaseVideoPlayer>) GSYBaseVideoPlayer.this.getClass().getConstructor(Context.class);
+                constructor = (Constructor<IJKBaseVideoPlayer>) IJKBaseVideoPlayer.this.getClass().getConstructor(Context.class);
                 gsyVideoPlayer = constructor.newInstance(mContext);
             } else {
-                constructor = (Constructor<GSYBaseVideoPlayer>) GSYBaseVideoPlayer.this.getClass().getConstructor(Context.class, Boolean.class);
+                constructor = (Constructor<IJKBaseVideoPlayer>) IJKBaseVideoPlayer.this.getClass().getConstructor(Context.class, Boolean.class);
                 gsyVideoPlayer = constructor.newInstance(mContext, true);
             }
 
@@ -741,7 +741,7 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
      * 显示小窗口
      */
     @SuppressWarnings("ResourceType, unchecked")
-    public GSYBaseVideoPlayer showSmallVideo(Point size, final boolean actionBar, final boolean statusBar) {
+    public IJKBaseVideoPlayer showSmallVideo(Point size, final boolean actionBar, final boolean statusBar) {
 
         final ViewGroup vp = getViewGroup();
 
@@ -752,8 +752,8 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
         }
 
         try {
-            Constructor<GSYBaseVideoPlayer> constructor = (Constructor<GSYBaseVideoPlayer>) GSYBaseVideoPlayer.this.getClass().getConstructor(Context.class);
-            GSYBaseVideoPlayer gsyVideoPlayer = constructor.newInstance(getActivityContext());
+            Constructor<IJKBaseVideoPlayer> constructor = (Constructor<IJKBaseVideoPlayer>) IJKBaseVideoPlayer.this.getClass().getConstructor(Context.class);
+            IJKBaseVideoPlayer gsyVideoPlayer = constructor.newInstance(getActivityContext());
             gsyVideoPlayer.setId(getSmallId());
 
             FrameLayout.LayoutParams lpParent = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -805,7 +805,7 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
     @SuppressWarnings("ResourceType")
     public void hideSmallVideo() {
         final ViewGroup vp = getViewGroup();
-        GSYVideoPlayer gsyVideoPlayer = (GSYVideoPlayer) vp.findViewById(getSmallId());
+        IJKVideoPlayer gsyVideoPlayer = (IJKVideoPlayer) vp.findViewById(getSmallId());
         removeVideo(vp, getSmallId());
         mCurrentState = getGSYVideoManager().getLastState();
         if (gsyVideoPlayer != null) {
@@ -885,12 +885,12 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
      * @return GSYVideoPlayer 如果没有则返回空。
      */
     @SuppressWarnings("ResourceType")
-    public GSYVideoPlayer getFullWindowPlayer() {
+    public IJKVideoPlayer getFullWindowPlayer() {
         ViewGroup vp = (ViewGroup) (CommonUtil.scanForActivity(getContext())).findViewById(Window.ID_ANDROID_CONTENT);
         final View full = vp.findViewById(getFullId());
-        GSYVideoPlayer gsyVideoPlayer = null;
+        IJKVideoPlayer gsyVideoPlayer = null;
         if (full != null) {
-            gsyVideoPlayer = (GSYVideoPlayer) full;
+            gsyVideoPlayer = (IJKVideoPlayer) full;
         }
         return gsyVideoPlayer;
     }
@@ -901,12 +901,12 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
      * @return GSYVideoPlayer 如果没有则返回空。
      */
     @SuppressWarnings("ResourceType")
-    public GSYVideoPlayer getSmallWindowPlayer() {
+    public IJKVideoPlayer getSmallWindowPlayer() {
         ViewGroup vp = (ViewGroup) (CommonUtil.scanForActivity(getContext())).findViewById(Window.ID_ANDROID_CONTENT);
         final View small = vp.findViewById(getSmallId());
-        GSYVideoPlayer gsyVideoPlayer = null;
+        IJKVideoPlayer gsyVideoPlayer = null;
         if (small != null) {
-            gsyVideoPlayer = (GSYVideoPlayer) small;
+            gsyVideoPlayer = (IJKVideoPlayer) small;
         }
         return gsyVideoPlayer;
     }
@@ -914,7 +914,7 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
     /**
      * 获取当前长在播放的播放控件
      */
-    public GSYBaseVideoPlayer getCurrentPlayer() {
+    public IJKBaseVideoPlayer getCurrentPlayer() {
         if (getFullWindowPlayer() != null) {
             return getFullWindowPlayer();
         }
@@ -1003,7 +1003,7 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
      *
      * @param gsyVideoPlayer 将要显示的播放器对象
      */
-    protected void checkAutoFullWithSizeAndAdaptation(final GSYBaseVideoPlayer gsyVideoPlayer) {
+    protected void checkAutoFullWithSizeAndAdaptation(final IJKBaseVideoPlayer gsyVideoPlayer) {
         if (gsyVideoPlayer != null) {
             //判断是否自动选择；判断是否是竖直的视频；判断是否隐藏状态栏
             if (isNeedAutoAdaptation &&

@@ -12,13 +12,13 @@ import androidx.annotation.Nullable;
 
 
 import com.ymc.videodemo.ijk.base.cache.ICacheManager;
-import com.ymc.videodemo.ijk.base.model.GSYModel;
+import com.ymc.videodemo.ijk.base.model.IJKModel;
 import com.ymc.videodemo.ijk.base.model.VideoOptionModel;
 import com.ymc.videodemo.ijk.base.player.BasePlayerManager;
 import com.ymc.videodemo.ijk.base.player.IPlayerInitSuccessListener;
 import com.ymc.videodemo.ijk.base.player.IPlayerManager;
 import com.ymc.videodemo.ijk.cache.CacheFactory;
-import com.ymc.videodemo.ijk.listener.GSYMediaPlayerListener;
+import com.ymc.videodemo.ijk.listener.IJKMediaPlayerListener;
 import com.ymc.videodemo.ijk.player.PlayerFactory;
 import com.ymc.videodemo.ijk.video.base.GSYVideoViewBridge;
 
@@ -35,7 +35,7 @@ import tv.danmaku.ijk.media.player.IMediaPlayer;
  Created by guoshuyu on 2018/1/25.
  */
 
-public abstract class GSYVideoBaseManager implements IMediaPlayer.OnPreparedListener, IMediaPlayer.OnCompletionListener,
+public abstract class IJKVideoBaseManager implements IMediaPlayer.OnPreparedListener, IMediaPlayer.OnCompletionListener,
         IMediaPlayer.OnBufferingUpdateListener, IMediaPlayer.OnSeekCompleteListener, IMediaPlayer.OnErrorListener,
         IMediaPlayer.OnVideoSizeChangedListener, IMediaPlayer.OnInfoListener, ICacheManager.ICacheAvailableListener, GSYVideoViewBridge {
 
@@ -55,9 +55,9 @@ public abstract class GSYVideoBaseManager implements IMediaPlayer.OnPreparedList
 
     protected Handler mainThreadHandler;
 
-    protected WeakReference<GSYMediaPlayerListener> listener;
+    protected WeakReference<IJKMediaPlayerListener> listener;
 
-    protected WeakReference<GSYMediaPlayerListener> lastListener;
+    protected WeakReference<IJKMediaPlayerListener> lastListener;
 
     protected IPlayerInitSuccessListener mPlayerInitSuccessListener;
 
@@ -158,21 +158,21 @@ public abstract class GSYVideoBaseManager implements IMediaPlayer.OnPreparedList
     }
 
     @Override
-    public GSYMediaPlayerListener listener() {
+    public IJKMediaPlayerListener listener() {
         if (listener == null)
             return null;
         return listener.get();
     }
 
     @Override
-    public GSYMediaPlayerListener lastListener() {
+    public IJKMediaPlayerListener lastListener() {
         if (lastListener == null)
             return null;
         return lastListener.get();
     }
 
     @Override
-    public void setListener(GSYMediaPlayerListener listener) {
+    public void setListener(IJKMediaPlayerListener listener) {
         if (listener == null)
             this.listener = null;
         else
@@ -180,7 +180,7 @@ public abstract class GSYVideoBaseManager implements IMediaPlayer.OnPreparedList
     }
 
     @Override
-    public void setLastListener(GSYMediaPlayerListener lastListener) {
+    public void setLastListener(IJKMediaPlayerListener lastListener) {
         if (lastListener == null)
             this.lastListener = null;
         else
@@ -204,7 +204,7 @@ public abstract class GSYVideoBaseManager implements IMediaPlayer.OnPreparedList
         if (TextUtils.isEmpty(url)) return;
         Message msg = new Message();
         msg.what = HANDLER_PREPARE;
-        GSYModel fb = new GSYModel(url, mapHeadData, loop, speed, cache, cachePath, overrideExtension);
+        IJKModel fb = new IJKModel(url, mapHeadData, loop, speed, cache, cachePath, overrideExtension);
         msg.obj = fb;
         sendMessage(msg);
         if (needTimeOutOther) {

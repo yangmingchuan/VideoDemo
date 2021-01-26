@@ -6,17 +6,17 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ymc.videodemo.ijk.builder.GSYVideoOptionBuilder;
+import com.ymc.videodemo.ijk.builder.IJKVideoOptionBuilder;
 import com.ymc.videodemo.ijk.listener.VideoAllCallBack;
 import com.ymc.videodemo.ijk.utils.OrientationOption;
 import com.ymc.videodemo.ijk.utils.OrientationUtils;
-import com.ymc.videodemo.ijk.video.base.GSYBaseVideoPlayer;
+import com.ymc.videodemo.ijk.video.base.IJKBaseVideoPlayer;
 
 /**
  * 详情模式播放页面基础类
  * Created by guoshuyu on 2017/9/14.
  */
-public abstract class GSYBaseActivityDetail<T extends GSYBaseVideoPlayer> extends AppCompatActivity implements VideoAllCallBack {
+public abstract class IJKBaseActivityDetail<T extends IJKBaseVideoPlayer> extends AppCompatActivity implements VideoAllCallBack {
 
     protected boolean isPlay;
 
@@ -65,7 +65,7 @@ public abstract class GSYBaseActivityDetail<T extends GSYBaseVideoPlayer> extend
             orientationUtils.resolveByClick();
         }
         //第一个true是否需要隐藏actionbar，第二个true是否需要隐藏statusbar
-        getGSYVideoPlayer().startWindowFullscreen(GSYBaseActivityDetail.this, hideActionBarWhenFull(), hideStatusBarWhenFull());
+        getGSYVideoPlayer().startWindowFullscreen(IJKBaseActivityDetail.this, hideActionBarWhenFull(), hideStatusBarWhenFull());
 
     }
 
@@ -74,7 +74,7 @@ public abstract class GSYBaseActivityDetail<T extends GSYBaseVideoPlayer> extend
         if (orientationUtils != null) {
             orientationUtils.backToProtVideo();
         }
-        if (GSYVideoManager.backFromWindowFull(this)) {
+        if (IJKVideoManager.backFromWindowFull(this)) {
             return;
         }
         super.onBackPressed();
@@ -269,7 +269,7 @@ public abstract class GSYBaseActivityDetail<T extends GSYBaseVideoPlayer> extend
     /**
      * 配置播放器
      */
-    public abstract GSYVideoOptionBuilder getGSYVideoOptionBuilder();
+    public abstract IJKVideoOptionBuilder getGSYVideoOptionBuilder();
 
     /**
      * 点击了全屏

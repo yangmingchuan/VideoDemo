@@ -22,7 +22,7 @@ import androidx.annotation.Nullable;
 
 
 import com.ymc.videodemo.R;
-import com.ymc.videodemo.ijk.listener.GSYMediaPlayerListener;
+import com.ymc.videodemo.ijk.listener.IJKMediaPlayerListener;
 import com.ymc.videodemo.ijk.listener.VideoAllCallBack;
 import com.ymc.videodemo.ijk.utils.CommonUtil;
 import com.ymc.videodemo.ijk.utils.NetInfoModule;
@@ -39,7 +39,7 @@ import static com.ymc.videodemo.ijk.utils.CommonUtil.getTextSpeed;
  * Created by guoshuyu on 2017/8/2.
  */
 
-public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMediaPlayerListener {
+public abstract class IJKVideoView extends GSYTextureRenderView implements IJKMediaPlayerListener {
 
     //正常
     public static final int CURRENT_STATE_NORMAL = 0;
@@ -158,22 +158,22 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
     //网络监听
     protected NetInfoModule mNetInfoModule;
 
-    public GSYVideoView(@NonNull Context context) {
+    public IJKVideoView(@NonNull Context context) {
         super(context);
         init(context);
     }
 
-    public GSYVideoView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public IJKVideoView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public GSYVideoView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
+    public IJKVideoView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
 
-    public GSYVideoView(Context context, Boolean fullFlag) {
+    public IJKVideoView(Context context, Boolean fullFlag) {
         super(context);
         mIfCurrentIsFullscreen = fullFlag;
         init(context);
@@ -370,10 +370,10 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
     protected void onLossAudio() {
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             public void run() {
-                if (GSYVideoView.this.mReleaseWhenLossAudio) {
-                    GSYVideoView.this.releaseVideos();
+                if (IJKVideoView.this.mReleaseWhenLossAudio) {
+                    IJKVideoView.this.releaseVideos();
                 } else {
-                    GSYVideoView.this.onVideoPause();
+                    IJKVideoView.this.onVideoPause();
                 }
 
             }

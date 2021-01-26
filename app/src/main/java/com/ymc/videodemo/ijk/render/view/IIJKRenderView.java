@@ -6,10 +6,10 @@ import android.graphics.Matrix;
 import android.view.View;
 
 
-import com.ymc.videodemo.ijk.listener.GSYVideoShotListener;
-import com.ymc.videodemo.ijk.listener.GSYVideoShotSaveListener;
-import com.ymc.videodemo.ijk.render.glrender.GSYVideoGLViewBaseRender;
-import com.ymc.videodemo.ijk.render.view.listener.IGSYSurfaceListener;
+import com.ymc.videodemo.ijk.listener.IJKVideoShotListener;
+import com.ymc.videodemo.ijk.listener.IJKVideoShotSaveListener;
+import com.ymc.videodemo.ijk.render.glrender.IJKVideoGLViewBaseRender;
+import com.ymc.videodemo.ijk.render.view.listener.IIJKSurfaceListener;
 import com.ymc.videodemo.ijk.utils.MeasureHelper;
 
 import java.io.File;
@@ -18,14 +18,14 @@ import java.io.File;
  * Created by guoshuyu on 2018/1/29.
  */
 
-public interface IGSYRenderView {
+public interface IIJKRenderView {
 
-    IGSYSurfaceListener getIGSYSurfaceListener();
+    IIJKSurfaceListener getIGSYSurfaceListener();
 
     /**
      * Surface变化监听，必须
      */
-    void setIGSYSurfaceListener(IGSYSurfaceListener surfaceListener);
+    void setIGSYSurfaceListener(IIJKSurfaceListener surfaceListener);
 
     /**
      * 当前view高度，必须
@@ -50,12 +50,12 @@ public interface IGSYRenderView {
     /**
      * 截图
      */
-    void taskShotPic(GSYVideoShotListener gsyVideoShotListener, boolean shotHigh);
+    void taskShotPic(IJKVideoShotListener IJKVideoShotListener, boolean shotHigh);
 
     /**
      * 保存当前帧
      */
-    void saveFrame(final File file, final boolean high, final GSYVideoShotSaveListener gsyVideoShotSaveListener);
+    void saveFrame(final File file, final boolean high, final IJKVideoShotSaveListener IJKVideoShotSaveListener);
 
     /**
      * 获取当前画面的bitmap，没有返回空
@@ -77,10 +77,10 @@ public interface IGSYRenderView {
 
     void setRenderTransform(Matrix transform);
 
-    void setGLRenderer(GSYVideoGLViewBaseRender renderer);
+    void setGLRenderer(IJKVideoGLViewBaseRender renderer);
 
     void setGLMVPMatrix(float[] MVPMatrix);
 
-    void setGLEffectFilter(GSYVideoGLView.ShaderInterface effectFilter);
+    void setGLEffectFilter(IJKVideoGLView.ShaderInterface effectFilter);
 
 }

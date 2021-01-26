@@ -20,11 +20,11 @@ import android.widget.TextView;
 import com.ymc.videodemo.R;
 import com.ymc.videodemo.ijk.base.ENDownloadView;
 import com.ymc.videodemo.ijk.base.ENPlayView;
-import com.ymc.videodemo.ijk.listener.GSYVideoShotListener;
-import com.ymc.videodemo.ijk.listener.GSYVideoShotSaveListener;
+import com.ymc.videodemo.ijk.listener.IJKVideoShotListener;
+import com.ymc.videodemo.ijk.listener.IJKVideoShotSaveListener;
 import com.ymc.videodemo.ijk.utils.NetworkUtils;
-import com.ymc.videodemo.ijk.video.base.GSYBaseVideoPlayer;
-import com.ymc.videodemo.ijk.video.base.GSYVideoPlayer;
+import com.ymc.videodemo.ijk.video.base.IJKBaseVideoPlayer;
+import com.ymc.videodemo.ijk.video.base.IJKVideoPlayer;
 
 import java.io.File;
 
@@ -34,7 +34,7 @@ import java.io.File;
  * Created by shuyu on 2016/11/11.
  */
 
-public class StandardGSYVideoPlayer extends GSYVideoPlayer {
+public class StandardIJKVideoPlayer extends IJKVideoPlayer {
 
     //亮度dialog
     protected Dialog mBrightnessDialog;
@@ -80,15 +80,15 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
     /**
      * 1.5.0开始加入，如果需要不同布局区分功能，需要重载
      */
-    public StandardGSYVideoPlayer(Context context, Boolean fullFlag) {
+    public StandardIJKVideoPlayer(Context context, Boolean fullFlag) {
         super(context, fullFlag);
     }
 
-    public StandardGSYVideoPlayer(Context context) {
+    public StandardIJKVideoPlayer(Context context) {
         super(context);
     }
 
-    public StandardGSYVideoPlayer(Context context, AttributeSet attrs) {
+    public StandardIJKVideoPlayer(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -129,7 +129,7 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
     @Override
     public void startPlayLogic() {
         if (mVideoAllCallBack != null) {
-            mVideoAllCallBack.onClickStartThumb(mOriginUrl, mTitle, StandardGSYVideoPlayer.this);
+            mVideoAllCallBack.onClickStartThumb(mOriginUrl, mTitle, StandardIJKVideoPlayer.this);
         }
         prepareVideo();
         startDismissControlViewTimer();
@@ -331,10 +331,10 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
     }
 
     @Override
-    protected void cloneParams(GSYBaseVideoPlayer from, GSYBaseVideoPlayer to) {
+    protected void cloneParams(IJKBaseVideoPlayer from, IJKBaseVideoPlayer to) {
         super.cloneParams(from, to);
-        StandardGSYVideoPlayer sf = (StandardGSYVideoPlayer) from;
-        StandardGSYVideoPlayer st = (StandardGSYVideoPlayer) to;
+        StandardIJKVideoPlayer sf = (StandardIJKVideoPlayer) from;
+        StandardIJKVideoPlayer st = (StandardIJKVideoPlayer) to;
         if (st.mProgressBar != null && sf.mProgressBar != null) {
             st.mProgressBar.setProgress(sf.mProgressBar.getProgress());
             st.mProgressBar.setSecondaryProgress(sf.mProgressBar.getSecondaryProgress());
@@ -356,10 +356,10 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
      * @return
      */
     @Override
-    public GSYBaseVideoPlayer startWindowFullscreen(Context context, boolean actionBar, boolean statusBar) {
-        GSYBaseVideoPlayer gsyBaseVideoPlayer = super.startWindowFullscreen(context, actionBar, statusBar);
+    public IJKBaseVideoPlayer startWindowFullscreen(Context context, boolean actionBar, boolean statusBar) {
+        IJKBaseVideoPlayer gsyBaseVideoPlayer = super.startWindowFullscreen(context, actionBar, statusBar);
         if (gsyBaseVideoPlayer != null) {
-            StandardGSYVideoPlayer gsyVideoPlayer = (StandardGSYVideoPlayer) gsyBaseVideoPlayer;
+            StandardIJKVideoPlayer gsyVideoPlayer = (StandardIJKVideoPlayer) gsyBaseVideoPlayer;
             gsyVideoPlayer.setLockClickListener(mLockClickListener);
             gsyVideoPlayer.setNeedLockFull(isNeedLockFull());
             initFullUI(gsyVideoPlayer);
@@ -743,7 +743,7 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
     /**
      * 全屏的UI逻辑
      */
-    private void initFullUI(StandardGSYVideoPlayer standardGSYVideoPlayer) {
+    private void initFullUI(StandardIJKVideoPlayer standardGSYVideoPlayer) {
 
         if (mBottomProgressDrawable != null) {
             standardGSYVideoPlayer.setBottomProgressBarDrawable(mBottomProgressDrawable);
@@ -818,8 +818,8 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
     /**
      * 获取截图
      */
-    public void taskShotPic(GSYVideoShotListener gsyVideoShotListener) {
-        this.taskShotPic(gsyVideoShotListener, false);
+    public void taskShotPic(IJKVideoShotListener IJKVideoShotListener) {
+        this.taskShotPic(IJKVideoShotListener, false);
     }
 
     /**
@@ -827,17 +827,17 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
      *
      * @param high 是否需要高清的
      */
-    public void taskShotPic(GSYVideoShotListener gsyVideoShotListener, boolean high) {
+    public void taskShotPic(IJKVideoShotListener IJKVideoShotListener, boolean high) {
         if (getCurrentPlayer().getRenderProxy() != null) {
-            getCurrentPlayer().getRenderProxy().taskShotPic(gsyVideoShotListener, high);
+            getCurrentPlayer().getRenderProxy().taskShotPic(IJKVideoShotListener, high);
         }
     }
 
     /**
      * 保存截图
      */
-    public void saveFrame(final File file, GSYVideoShotSaveListener gsyVideoShotSaveListener) {
-        saveFrame(file, false, gsyVideoShotSaveListener);
+    public void saveFrame(final File file, IJKVideoShotSaveListener IJKVideoShotSaveListener) {
+        saveFrame(file, false, IJKVideoShotSaveListener);
     }
 
     /**
@@ -845,9 +845,9 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
      *
      * @param high 是否需要高清的
      */
-    public void saveFrame(final File file, final boolean high, final GSYVideoShotSaveListener gsyVideoShotSaveListener) {
+    public void saveFrame(final File file, final boolean high, final IJKVideoShotSaveListener IJKVideoShotSaveListener) {
         if (getCurrentPlayer().getRenderProxy() != null) {
-            getCurrentPlayer().getRenderProxy().saveFrame(file, high, gsyVideoShotSaveListener);
+            getCurrentPlayer().getRenderProxy().saveFrame(file, high, IJKVideoShotSaveListener);
         }
     }
 

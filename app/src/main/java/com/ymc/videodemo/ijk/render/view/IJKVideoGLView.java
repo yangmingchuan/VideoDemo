@@ -10,15 +10,15 @@ import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ymc.videodemo.ijk.listener.GSYVideoShotListener;
-import com.ymc.videodemo.ijk.listener.GSYVideoShotSaveListener;
-import com.ymc.videodemo.ijk.render.GSYRenderView;
+import com.ymc.videodemo.ijk.listener.IJKVideoShotListener;
+import com.ymc.videodemo.ijk.listener.IJKVideoShotSaveListener;
+import com.ymc.videodemo.ijk.render.IJKRenderView;
 import com.ymc.videodemo.ijk.render.effect.NoEffect;
-import com.ymc.videodemo.ijk.render.glrender.GSYVideoGLViewBaseRender;
-import com.ymc.videodemo.ijk.render.glrender.GSYVideoGLViewSimpleRender;
+import com.ymc.videodemo.ijk.render.glrender.IJKVideoGLViewBaseRender;
+import com.ymc.videodemo.ijk.render.glrender.IJKVideoGLViewSimpleRender;
 import com.ymc.videodemo.ijk.render.view.listener.GLSurfaceListener;
-import com.ymc.videodemo.ijk.render.view.listener.GSYVideoGLRenderErrorListener;
-import com.ymc.videodemo.ijk.render.view.listener.IGSYSurfaceListener;
+import com.ymc.videodemo.ijk.render.view.listener.IJKVideoGLRenderErrorListener;
+import com.ymc.videodemo.ijk.render.view.listener.IIJKSurfaceListener;
 import com.ymc.videodemo.ijk.utils.FileUtils;
 import com.ymc.videodemo.ijk.utils.MeasureHelper;
 
@@ -31,9 +31,9 @@ import java.io.File;
  * 原 @author sheraz.khilji
  */
 @SuppressLint("ViewConstructor")
-public class GSYVideoGLView extends GLSurfaceView implements GLSurfaceListener, IGSYRenderView, MeasureHelper.MeasureFormVideoParamsListener {
+public class IJKVideoGLView extends GLSurfaceView implements GLSurfaceListener, IIJKRenderView, MeasureHelper.MeasureFormVideoParamsListener {
 
-    private static final String TAG = GSYVideoGLView.class.getName();
+    private static final String TAG = IJKVideoGLView.class.getName();
     /**
      * 利用布局计算大小
      */
@@ -43,7 +43,7 @@ public class GSYVideoGLView extends GLSurfaceView implements GLSurfaceListener, 
      */
     public static final int MODE_RENDER_SIZE = 1;
 
-    private GSYVideoGLViewBaseRender mRenderer;
+    private IJKVideoGLViewBaseRender mRenderer;
 
     private Context mContext;
 
@@ -55,7 +55,7 @@ public class GSYVideoGLView extends GLSurfaceView implements GLSurfaceListener, 
 
     private GLSurfaceListener mOnGSYSurfaceListener;
 
-    private IGSYSurfaceListener mIGSYSurfaceListener;
+    private IIJKSurfaceListener mIIJKSurfaceListener;
 
     private float[] mMVPMatrix;
 
@@ -65,12 +65,12 @@ public class GSYVideoGLView extends GLSurfaceView implements GLSurfaceListener, 
         String getShader(GLSurfaceView mGlSurfaceView);
     }
 
-    public GSYVideoGLView(Context context) {
+    public IJKVideoGLView(Context context) {
         super(context);
         init(context);
     }
 
-    public GSYVideoGLView(Context context, AttributeSet attrs) {
+    public IJKVideoGLView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
@@ -78,9 +78,9 @@ public class GSYVideoGLView extends GLSurfaceView implements GLSurfaceListener, 
     private void init(Context context) {
         mContext = context;
         setEGLContextClientVersion(2);
-        mRenderer = new GSYVideoGLViewSimpleRender();
+        mRenderer = new IJKVideoGLViewSimpleRender();
         measureHelper = new MeasureHelper(this, this);
-        mRenderer.setSurfaceView(GSYVideoGLView.this);
+        mRenderer.setSurfaceView(IJKVideoGLView.this);
     }
 
     @Override
@@ -104,20 +104,20 @@ public class GSYVideoGLView extends GLSurfaceView implements GLSurfaceListener, 
     }
 
     @Override
-    public IGSYSurfaceListener getIGSYSurfaceListener() {
-        return mIGSYSurfaceListener;
+    public IIJKSurfaceListener getIGSYSurfaceListener() {
+        return mIIJKSurfaceListener;
     }
 
     @Override
-    public void setIGSYSurfaceListener(IGSYSurfaceListener surfaceListener) {
+    public void setIGSYSurfaceListener(IIJKSurfaceListener surfaceListener) {
         setOnGSYSurfaceListener(this);
-        mIGSYSurfaceListener = surfaceListener;
+        mIIJKSurfaceListener = surfaceListener;
     }
 
     @Override
     public void onSurfaceAvailable(Surface surface) {
-        if (mIGSYSurfaceListener != null) {
-            mIGSYSurfaceListener.onSurfaceAvailable(surface);
+        if (mIIJKSurfaceListener != null) {
+            mIIJKSurfaceListener.onSurfaceAvailable(surface);
         }
     }
 
@@ -147,9 +147,9 @@ public class GSYVideoGLView extends GLSurfaceView implements GLSurfaceListener, 
      * @param shotHigh 是否需要高清的
      */
     @Override
-    public void taskShotPic(GSYVideoShotListener gsyVideoShotListener, boolean shotHigh) {
-        if (gsyVideoShotListener != null) {
-            setGSYVideoShotListener(gsyVideoShotListener, shotHigh);
+    public void taskShotPic(IJKVideoShotListener IJKVideoShotListener, boolean shotHigh) {
+        if (IJKVideoShotListener != null) {
+            setGSYVideoShotListener(IJKVideoShotListener, shotHigh);
             takeShotPic();
 
         }
@@ -161,19 +161,19 @@ public class GSYVideoGLView extends GLSurfaceView implements GLSurfaceListener, 
      * @param high 是否需要高清的
      */
     @Override
-    public void saveFrame(final File file, final boolean high, final GSYVideoShotSaveListener gsyVideoShotSaveListener) {
-        GSYVideoShotListener gsyVideoShotListener = new GSYVideoShotListener() {
+    public void saveFrame(final File file, final boolean high, final IJKVideoShotSaveListener IJKVideoShotSaveListener) {
+        IJKVideoShotListener IJKVideoShotListener = new IJKVideoShotListener() {
             @Override
             public void getBitmap(Bitmap bitmap) {
                 if (bitmap == null) {
-                    gsyVideoShotSaveListener.result(false, file);
+                    IJKVideoShotSaveListener.result(false, file);
                 } else {
                     FileUtils.saveBitmap(bitmap, file);
-                    gsyVideoShotSaveListener.result(true, file);
+                    IJKVideoShotSaveListener.result(true, file);
                 }
             }
         };
-        setGSYVideoShotListener(gsyVideoShotListener, high);
+        setGSYVideoShotListener(IJKVideoShotListener, high);
         takeShotPic();
     }
 
@@ -214,7 +214,7 @@ public class GSYVideoGLView extends GLSurfaceView implements GLSurfaceListener, 
     }
 
     @Override
-    public void setGLRenderer(GSYVideoGLViewBaseRender renderer) {
+    public void setGLRenderer(IJKVideoGLViewBaseRender renderer) {
         setCustomRenderer(renderer);
     }
 
@@ -227,7 +227,7 @@ public class GSYVideoGLView extends GLSurfaceView implements GLSurfaceListener, 
      * 设置滤镜效果
      */
     @Override
-    public void setGLEffectFilter(GSYVideoGLView.ShaderInterface effectFilter) {
+    public void setGLEffectFilter(IJKVideoGLView.ShaderInterface effectFilter) {
         setEffect(effectFilter);
     }
 
@@ -292,7 +292,7 @@ public class GSYVideoGLView extends GLSurfaceView implements GLSurfaceListener, 
     }
 
 
-    public void setGSYVideoGLRenderErrorListener(GSYVideoGLRenderErrorListener videoGLRenderErrorListener) {
+    public void setGSYVideoGLRenderErrorListener(IJKVideoGLRenderErrorListener videoGLRenderErrorListener) {
         this.mRenderer.setGSYVideoGLRenderErrorListener(videoGLRenderErrorListener);
     }
 
@@ -302,9 +302,9 @@ public class GSYVideoGLView extends GLSurfaceView implements GLSurfaceListener, 
      *
      * @param CustomRender
      */
-    public void setCustomRenderer(GSYVideoGLViewBaseRender CustomRender) {
+    public void setCustomRenderer(IJKVideoGLViewBaseRender CustomRender) {
         this.mRenderer = CustomRender;
-        mRenderer.setSurfaceView(GSYVideoGLView.this);
+        mRenderer.setSurfaceView(IJKVideoGLView.this);
         initRenderMeasure();
     }
 
@@ -332,7 +332,7 @@ public class GSYVideoGLView extends GLSurfaceView implements GLSurfaceListener, 
     }
 
 
-    public void setGSYVideoShotListener(GSYVideoShotListener listener, boolean high) {
+    public void setGSYVideoShotListener(IJKVideoShotListener listener, boolean high) {
         this.mRenderer.setGSYVideoShotListener(listener, high);
     }
 
@@ -353,7 +353,7 @@ public class GSYVideoGLView extends GLSurfaceView implements GLSurfaceListener, 
         }
     }
 
-    public GSYVideoGLViewBaseRender getRenderer() {
+    public IJKVideoGLViewBaseRender getRenderer() {
         return mRenderer;
     }
 
@@ -368,27 +368,27 @@ public class GSYVideoGLView extends GLSurfaceView implements GLSurfaceListener, 
     /**
      * 添加播放的view
      */
-    public static GSYVideoGLView addGLView(final Context context, final ViewGroup textureViewContainer, final int rotate,
-                                           final IGSYSurfaceListener gsySurfaceListener,
+    public static IJKVideoGLView addGLView(final Context context, final ViewGroup textureViewContainer, final int rotate,
+                                           final IIJKSurfaceListener gsySurfaceListener,
                                            final MeasureHelper.MeasureFormVideoParamsListener videoParamsListener,
-                                           final GSYVideoGLView.ShaderInterface effect, final float[] transform,
-                                           final GSYVideoGLViewBaseRender customRender, final int renderMode) {
+                                           final IJKVideoGLView.ShaderInterface effect, final float[] transform,
+                                           final IJKVideoGLViewBaseRender customRender, final int renderMode) {
         if (textureViewContainer.getChildCount() > 0) {
             textureViewContainer.removeAllViews();
         }
-        final GSYVideoGLView gsyVideoGLView = new GSYVideoGLView(context);
+        final IJKVideoGLView IJKVideoGLView = new IJKVideoGLView(context);
         if (customRender != null) {
-            gsyVideoGLView.setCustomRenderer(customRender);
+            IJKVideoGLView.setCustomRenderer(customRender);
         }
-        gsyVideoGLView.setEffect(effect);
-        gsyVideoGLView.setVideoParamsListener(videoParamsListener);
-        gsyVideoGLView.setRenderMode(renderMode);
-        gsyVideoGLView.setIGSYSurfaceListener(gsySurfaceListener);
-        gsyVideoGLView.setRotation(rotate);
-        gsyVideoGLView.initRender();
-        gsyVideoGLView.setGSYVideoGLRenderErrorListener(new GSYVideoGLRenderErrorListener() {
+        IJKVideoGLView.setEffect(effect);
+        IJKVideoGLView.setVideoParamsListener(videoParamsListener);
+        IJKVideoGLView.setRenderMode(renderMode);
+        IJKVideoGLView.setIGSYSurfaceListener(gsySurfaceListener);
+        IJKVideoGLView.setRotation(rotate);
+        IJKVideoGLView.initRender();
+        IJKVideoGLView.setGSYVideoGLRenderErrorListener(new IJKVideoGLRenderErrorListener() {
             @Override
-            public void onError(GSYVideoGLViewBaseRender render, String Error, int code, boolean byChangedRenderError) {
+            public void onError(IJKVideoGLViewBaseRender render, String Error, int code, boolean byChangedRenderError) {
                 if (byChangedRenderError)
                     addGLView(context,
                             textureViewContainer,
@@ -402,10 +402,10 @@ public class GSYVideoGLView extends GLSurfaceView implements GLSurfaceListener, 
             }
         });
         if (transform != null && transform.length == 16) {
-            gsyVideoGLView.setMVPMatrix(transform);
+            IJKVideoGLView.setMVPMatrix(transform);
         }
-        GSYRenderView.addToParent(textureViewContainer, gsyVideoGLView);
-        return gsyVideoGLView;
+        IJKRenderView.addToParent(textureViewContainer, IJKVideoGLView);
+        return IJKVideoGLView;
     }
 
 

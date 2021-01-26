@@ -3,7 +3,7 @@ package com.ymc.videodemo.ijk.render.effect;
 import android.graphics.Color;
 import android.opengl.GLSurfaceView;
 
-import com.ymc.videodemo.ijk.render.view.GSYVideoGLView;
+import com.ymc.videodemo.ijk.render.view.IJKVideoGLView;
 
 
 /**
@@ -11,7 +11,7 @@ import com.ymc.videodemo.ijk.render.view.GSYVideoGLView;
  *
  * @author sheraz.khilji
  */
-public class DuotoneEffect implements GSYVideoGLView.ShaderInterface {
+public class DuotoneEffect implements IJKVideoGLView.ShaderInterface {
     // Default values
     private int mFirstColor = Color.MAGENTA;
     private int mSecondColor = Color.YELLOW;

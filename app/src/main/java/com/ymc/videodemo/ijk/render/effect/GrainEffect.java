@@ -3,7 +3,7 @@ package com.ymc.videodemo.ijk.render.effect;
 import android.opengl.GLSurfaceView;
 
 
-import com.ymc.videodemo.ijk.render.view.GSYVideoGLView;
+import com.ymc.videodemo.ijk.render.view.IJKVideoGLView;
 
 import java.util.Date;
 import java.util.Random;
@@ -13,7 +13,7 @@ import java.util.Random;
  *
  * @author sheraz.khilji
  */
-public class GrainEffect implements GSYVideoGLView.ShaderInterface {
+public class GrainEffect implements IJKVideoGLView.ShaderInterface {
     private int mWidth;
     private int mHeight;
     private float strength;

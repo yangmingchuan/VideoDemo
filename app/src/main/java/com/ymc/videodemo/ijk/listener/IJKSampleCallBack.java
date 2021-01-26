@@ -5,7 +5,7 @@ package com.ymc.videodemo.ijk.listener;
  * Created by shuyu on 2016/11/23.
  */
 
-public class GSYSampleCallBack implements VideoAllCallBack {
+public class IJKSampleCallBack implements VideoAllCallBack {
 
     //开始加载，objects[0]是title，object[1]是当前所处播放器（全屏或非全屏）
     @Override

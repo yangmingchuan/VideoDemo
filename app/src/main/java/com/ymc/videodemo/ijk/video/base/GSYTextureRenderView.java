@@ -12,11 +12,11 @@ import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.ymc.videodemo.ijk.render.GSYRenderView;
+import com.ymc.videodemo.ijk.render.IJKRenderView;
 import com.ymc.videodemo.ijk.render.effect.NoEffect;
-import com.ymc.videodemo.ijk.render.glrender.GSYVideoGLViewBaseRender;
-import com.ymc.videodemo.ijk.render.view.GSYVideoGLView;
-import com.ymc.videodemo.ijk.render.view.listener.IGSYSurfaceListener;
+import com.ymc.videodemo.ijk.render.glrender.IJKVideoGLViewBaseRender;
+import com.ymc.videodemo.ijk.render.view.IJKVideoGLView;
+import com.ymc.videodemo.ijk.render.view.listener.IIJKSurfaceListener;
 import com.ymc.videodemo.ijk.utils.GSYVideoType;
 import com.ymc.videodemo.ijk.utils.MeasureHelper;
 
@@ -26,13 +26,13 @@ import com.ymc.videodemo.ijk.utils.MeasureHelper;
  * Created by guoshuyu on 2017/8/2.
  */
 
-public abstract class GSYTextureRenderView extends FrameLayout implements IGSYSurfaceListener, MeasureHelper.MeasureFormVideoParamsListener {
+public abstract class GSYTextureRenderView extends FrameLayout implements IIJKSurfaceListener, MeasureHelper.MeasureFormVideoParamsListener {
 
     //native绘制
     protected Surface mSurface;
 
     //渲染控件
-    protected GSYRenderView mTextureView;
+    protected IJKRenderView mTextureView;
 
     //渲染控件父类
     protected ViewGroup mTextureViewContainer;
@@ -41,10 +41,10 @@ public abstract class GSYTextureRenderView extends FrameLayout implements IGSYSu
     protected Bitmap mFullPauseBitmap;
 
     //GL的滤镜
-    protected GSYVideoGLView.ShaderInterface mEffectFilter = new NoEffect();
+    protected IJKVideoGLView.ShaderInterface mEffectFilter = new NoEffect();
 
     //GL的自定义渲染
-    protected GSYVideoGLViewBaseRender mRenderer;
+    protected IJKVideoGLViewBaseRender mRenderer;
 
     //GL的角度
     protected float[] mMatrixGL = null;
@@ -53,7 +53,7 @@ public abstract class GSYTextureRenderView extends FrameLayout implements IGSYSu
     protected int mRotate;
 
     //GL的布局模式
-    protected int mMode = GSYVideoGLView.MODE_LAYOUT_SIZE;
+    protected int mMode = IJKVideoGLView.MODE_LAYOUT_SIZE;
 
     public GSYTextureRenderView(@NonNull Context context) {
         super(context);
@@ -114,7 +114,7 @@ public abstract class GSYTextureRenderView extends FrameLayout implements IGSYSu
      * 继承后重载addTextureView，继承GSYRenderView后实现自己的IGSYRenderView类，既可以使用自己自定义的显示层
      */
     protected void addTextureView() {
-        mTextureView = new GSYRenderView();
+        mTextureView = new IJKRenderView();
         mTextureView.addView(getContext(), mTextureViewContainer, mRotate, this, this, mEffectFilter, mMatrixGL, mRenderer, mMode);
     }
 
@@ -159,21 +159,21 @@ public abstract class GSYTextureRenderView extends FrameLayout implements IGSYSu
         setSmallVideoTextureView();
     }
 
-    public GSYVideoGLView.ShaderInterface getEffectFilter() {
+    public IJKVideoGLView.ShaderInterface getEffectFilter() {
         return mEffectFilter;
     }
 
     /**
      * 获取渲染的代理层
      */
-    public GSYRenderView getRenderProxy() {
+    public IJKRenderView getRenderProxy() {
         return mTextureView;
     }
 
     /**
      * 设置滤镜效果
      */
-    public void setEffectFilter(GSYVideoGLView.ShaderInterface effectFilter) {
+    public void setEffectFilter(IJKVideoGLView.ShaderInterface effectFilter) {
         this.mEffectFilter = effectFilter;
         if (mTextureView != null) {
             mTextureView.setEffectFilter(effectFilter);
@@ -195,7 +195,7 @@ public abstract class GSYTextureRenderView extends FrameLayout implements IGSYSu
     /**
      * 自定义GL的渲染render
      */
-    public void setCustomGLRenderer(GSYVideoGLViewBaseRender renderer) {
+    public void setCustomGLRenderer(IJKVideoGLViewBaseRender renderer) {
         this.mRenderer = renderer;
         if (mTextureView != null) {
             mTextureView.setGLRenderer(renderer);

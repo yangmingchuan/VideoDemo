@@ -7,6 +7,6 @@ import android.graphics.Bitmap;
  * Created by guoshuyu on 2017/9/21.
  */
 
-public interface GSYVideoShotListener {
+public interface IJKVideoShotListener {
     void getBitmap(Bitmap bitmap);
 }

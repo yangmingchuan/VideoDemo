@@ -2,13 +2,13 @@ package com.ymc.videodemo.ijk.render.effect;
 
 import android.opengl.GLSurfaceView;
 
-import com.ymc.videodemo.ijk.render.view.GSYVideoGLView;
+import com.ymc.videodemo.ijk.render.view.IJKVideoGLView;
 
 
 /**
  * Apply Gamma Effect on Video being played
  */
-public class GammaEffect implements GSYVideoGLView.ShaderInterface {
+public class GammaEffect implements IJKVideoGLView.ShaderInterface {
     private float gammaValue;
 
     /**

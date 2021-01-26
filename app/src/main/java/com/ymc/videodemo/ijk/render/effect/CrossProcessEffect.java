@@ -2,7 +2,7 @@ package com.ymc.videodemo.ijk.render.effect;
 
 import android.opengl.GLSurfaceView;
 
-import com.ymc.videodemo.ijk.render.view.GSYVideoGLView;
+import com.ymc.videodemo.ijk.render.view.IJKVideoGLView;
 
 
 /**
@@ -11,7 +11,7 @@ import com.ymc.videodemo.ijk.render.view.GSYVideoGLView;
  *
  * @author sheraz.khilji
  */
-public class CrossProcessEffect implements GSYVideoGLView.ShaderInterface {
+public class CrossProcessEffect implements IJKVideoGLView.ShaderInterface {
 
     /**
      * Initialize Effect

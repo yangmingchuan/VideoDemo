@@ -12,7 +12,7 @@ import android.view.Surface;
 
 
 import com.ymc.videodemo.ijk.base.cache.ICacheManager;
-import com.ymc.videodemo.ijk.base.model.GSYModel;
+import com.ymc.videodemo.ijk.base.model.IJKModel;
 import com.ymc.videodemo.ijk.base.model.VideoOptionModel;
 import com.ymc.videodemo.ijk.base.player.BasePlayerManager;
 import com.ymc.videodemo.ijk.utils.GSYVideoType;
@@ -64,8 +64,8 @@ public class IjkPlayerManager extends BasePlayerManager {
             }
         });
 
-        GSYModel gsyModel = (GSYModel) msg.obj;
-        String url = gsyModel.getUrl();
+        IJKModel IJKModel = (IJKModel) msg.obj;
+        String url = IJKModel.getUrl();
 
 
         try {
@@ -76,8 +76,8 @@ public class IjkPlayerManager extends BasePlayerManager {
                 mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-handle-resolution-change", 1);
             }
 
-            if (gsyModel.isCache() && cacheManager != null) {
-                cacheManager.doCacheLogic(context, mediaPlayer, url, gsyModel.getMapHeadData(), gsyModel.getCachePath());
+            if (IJKModel.isCache() && cacheManager != null) {
+                cacheManager.doCacheLogic(context, mediaPlayer, url, IJKModel.getMapHeadData(), IJKModel.getCachePath());
             } else {
                 if (!TextUtils.isEmpty(url)) {
                     Uri uri = Uri.parse(url);
@@ -94,16 +94,16 @@ public class IjkPlayerManager extends BasePlayerManager {
                             e.printStackTrace();
                         }
                     } else {
-                        mediaPlayer.setDataSource(url, gsyModel.getMapHeadData());
+                        mediaPlayer.setDataSource(url, IJKModel.getMapHeadData());
                     }
                 } else {
-                    mediaPlayer.setDataSource(url, gsyModel.getMapHeadData());
+                    mediaPlayer.setDataSource(url, IJKModel.getMapHeadData());
                 }
             }
 
-            mediaPlayer.setLooping(gsyModel.isLooping());
-            if (gsyModel.getSpeed() != 1 && gsyModel.getSpeed() > 0) {
-                mediaPlayer.setSpeed(gsyModel.getSpeed());
+            mediaPlayer.setLooping(IJKModel.isLooping());
+            if (IJKModel.getSpeed() != 1 && IJKModel.getSpeed() > 0) {
+                mediaPlayer.setSpeed(IJKModel.getSpeed());
             }
             mediaPlayer.native_setLogLevel(logLevel);
             initIJKOption(mediaPlayer, optionModelList);
@@ -111,7 +111,7 @@ public class IjkPlayerManager extends BasePlayerManager {
             e.printStackTrace();
         }
 
-        initSuccess(gsyModel);
+        initSuccess(IJKModel);
     }
 
     @Override

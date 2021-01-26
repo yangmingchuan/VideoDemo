@@ -2,12 +2,12 @@ package com.ymc.videodemo.ijk.render.effect;
 
 import android.opengl.GLSurfaceView;
 
-import com.ymc.videodemo.ijk.render.view.GSYVideoGLView;
+import com.ymc.videodemo.ijk.render.view.IJKVideoGLView;
 
 /**
  * Apply Hue effect on the video being played
  */
-public class HueEffect implements GSYVideoGLView.ShaderInterface {
+public class HueEffect implements IJKVideoGLView.ShaderInterface {
     float hueValue;
 
     /**

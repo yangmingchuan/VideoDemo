@@ -1,7 +1,7 @@
 package com.ymc.videodemo.ijk.base.player;
 
 
-import com.ymc.videodemo.ijk.base.model.GSYModel;
+import com.ymc.videodemo.ijk.base.model.IJKModel;
 
 /**
  * 播放器差异管理接口
@@ -20,9 +20,9 @@ public abstract class BasePlayerManager implements IPlayerManager {
         this.mPlayerInitSuccessListener = listener;
     }
 
-    protected void initSuccess(GSYModel gsyModel) {
+    protected void initSuccess(IJKModel IJKModel) {
         if (mPlayerInitSuccessListener != null) {
-            mPlayerInitSuccessListener.onPlayerInitSuccess(getMediaPlayer(), gsyModel);
+            mPlayerInitSuccessListener.onPlayerInitSuccess(getMediaPlayer(), IJKModel);
         }
     }
 }

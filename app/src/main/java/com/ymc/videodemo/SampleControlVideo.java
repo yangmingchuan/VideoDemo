@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ymc.videodemo.ijk.utils.GSYVideoType;
-import com.ymc.videodemo.ijk.video.StandardGSYVideoPlayer;
-import com.ymc.videodemo.ijk.video.base.GSYBaseVideoPlayer;
-import com.ymc.videodemo.ijk.video.base.GSYVideoPlayer;
+import com.ymc.videodemo.ijk.video.StandardIJKVideoPlayer;
+import com.ymc.videodemo.ijk.video.base.IJKBaseVideoPlayer;
+import com.ymc.videodemo.ijk.video.base.IJKVideoPlayer;
 
 
 /**
@@ -21,7 +21,7 @@ import com.ymc.videodemo.ijk.video.base.GSYVideoPlayer;
  * 这只是单纯的作为全屏播放显示，如果需要做大小屏幕切换，请记得在这里耶设置上视频全屏的需要的自定义配置
  */
 
-public class SampleControlVideo extends StandardGSYVideoPlayer {
+public class SampleControlVideo extends StandardIJKVideoPlayer {
 
     private TextView mMoreScale;
 
@@ -183,7 +183,7 @@ public class SampleControlVideo extends StandardGSYVideoPlayer {
      * @return
      */
     @Override
-    public GSYBaseVideoPlayer startWindowFullscreen(Context context, boolean actionBar, boolean statusBar) {
+    public IJKBaseVideoPlayer startWindowFullscreen(Context context, boolean actionBar, boolean statusBar) {
         SampleControlVideo sampleVideo = (SampleControlVideo) super.startWindowFullscreen(context, actionBar, statusBar);
         sampleVideo.mSourcePosition = mSourcePosition;
         sampleVideo.mType = mType;
@@ -206,7 +206,7 @@ public class SampleControlVideo extends StandardGSYVideoPlayer {
      * @param gsyVideoPlayer
      */
     @Override
-    protected void resolveNormalVideoShow(View oldF, ViewGroup vp, GSYVideoPlayer gsyVideoPlayer) {
+    protected void resolveNormalVideoShow(View oldF, ViewGroup vp, IJKVideoPlayer gsyVideoPlayer) {
         super.resolveNormalVideoShow(oldF, vp, gsyVideoPlayer);
         if (gsyVideoPlayer != null) {
             SampleControlVideo sampleVideo = (SampleControlVideo) gsyVideoPlayer;

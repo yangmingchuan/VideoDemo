@@ -2,7 +2,7 @@ package com.ymc.videodemo.ijk.render.effect;
 
 import android.opengl.GLSurfaceView;
 
-import com.ymc.videodemo.ijk.render.view.GSYVideoGLView;
+import com.ymc.videodemo.ijk.render.view.IJKVideoGLView;
 
 
 /**
@@ -10,7 +10,7 @@ import com.ymc.videodemo.ijk.render.view.GSYVideoGLView;
  *
  * @author sheraz.khilji
  */
-public class ContrastEffect implements GSYVideoGLView.ShaderInterface {
+public class ContrastEffect implements IJKVideoGLView.ShaderInterface {
     private float contrast;
 
     /**

@@ -10,11 +10,11 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ymc.videodemo.ijk.listener.GSYVideoShotListener;
-import com.ymc.videodemo.ijk.listener.GSYVideoShotSaveListener;
-import com.ymc.videodemo.ijk.render.GSYRenderView;
-import com.ymc.videodemo.ijk.render.glrender.GSYVideoGLViewBaseRender;
-import com.ymc.videodemo.ijk.render.view.listener.IGSYSurfaceListener;
+import com.ymc.videodemo.ijk.listener.IJKVideoShotListener;
+import com.ymc.videodemo.ijk.listener.IJKVideoShotSaveListener;
+import com.ymc.videodemo.ijk.render.IJKRenderView;
+import com.ymc.videodemo.ijk.render.glrender.IJKVideoGLViewBaseRender;
+import com.ymc.videodemo.ijk.render.view.listener.IIJKSurfaceListener;
 import com.ymc.videodemo.ijk.utils.FileUtils;
 import com.ymc.videodemo.ijk.utils.GSYVideoType;
 import com.ymc.videodemo.ijk.utils.MeasureHelper;
@@ -26,9 +26,9 @@ import java.io.File;
  * Created by shuyu on 2016/11/11.
  */
 
-public class GSYTextureView extends TextureView implements TextureView.SurfaceTextureListener, IGSYRenderView, MeasureHelper.MeasureFormVideoParamsListener {
+public class IJKTextureView extends TextureView implements TextureView.SurfaceTextureListener, IIJKRenderView, MeasureHelper.MeasureFormVideoParamsListener {
 
-    private IGSYSurfaceListener mIGSYSurfaceListener;
+    private IIJKSurfaceListener mIIJKSurfaceListener;
 
     private MeasureHelper.MeasureFormVideoParamsListener mVideoParamsListener;
 
@@ -37,12 +37,12 @@ public class GSYTextureView extends TextureView implements TextureView.SurfaceTe
     private SurfaceTexture mSaveTexture;
     private Surface mSurface;
 
-    public GSYTextureView(Context context) {
+    public IJKTextureView(Context context) {
         super(context);
         init();
     }
 
-    public GSYTextureView(Context context, AttributeSet attrs) {
+    public IJKTextureView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
@@ -66,21 +66,21 @@ public class GSYTextureView extends TextureView implements TextureView.SurfaceTe
             } else {
                 setSurfaceTexture(mSaveTexture);
             }
-            if (mIGSYSurfaceListener != null) {
-                mIGSYSurfaceListener.onSurfaceAvailable(mSurface);
+            if (mIIJKSurfaceListener != null) {
+                mIIJKSurfaceListener.onSurfaceAvailable(mSurface);
             }
         } else {
             mSurface = new Surface(surface);
-            if (mIGSYSurfaceListener != null) {
-                mIGSYSurfaceListener.onSurfaceAvailable(mSurface);
+            if (mIIJKSurfaceListener != null) {
+                mIIJKSurfaceListener.onSurfaceAvailable(mSurface);
             }
         }
     }
 
     @Override
     public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-        if (mIGSYSurfaceListener != null) {
-            mIGSYSurfaceListener.onSurfaceSizeChanged(mSurface, width, height);
+        if (mIIJKSurfaceListener != null) {
+            mIIJKSurfaceListener.onSurfaceSizeChanged(mSurface, width, height);
         }
     }
 
@@ -88,8 +88,8 @@ public class GSYTextureView extends TextureView implements TextureView.SurfaceTe
     public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
 
         //清空释放
-        if (mIGSYSurfaceListener != null) {
-            mIGSYSurfaceListener.onSurfaceDestroyed(mSurface);
+        if (mIIJKSurfaceListener != null) {
+            mIIJKSurfaceListener.onSurfaceDestroyed(mSurface);
         }
         if (GSYVideoType.isMediaCodecTexture()) {
             return (mSaveTexture == null);
@@ -101,20 +101,20 @@ public class GSYTextureView extends TextureView implements TextureView.SurfaceTe
     @Override
     public void onSurfaceTextureUpdated(SurfaceTexture surface) {
         //如果播放的是暂停全屏了
-        if (mIGSYSurfaceListener != null) {
-            mIGSYSurfaceListener.onSurfaceUpdated(mSurface);
+        if (mIIJKSurfaceListener != null) {
+            mIIJKSurfaceListener.onSurfaceUpdated(mSurface);
         }
     }
 
     @Override
-    public IGSYSurfaceListener getIGSYSurfaceListener() {
-        return mIGSYSurfaceListener;
+    public IIJKSurfaceListener getIGSYSurfaceListener() {
+        return mIIJKSurfaceListener;
     }
 
     @Override
-    public void setIGSYSurfaceListener(IGSYSurfaceListener surfaceListener) {
+    public void setIGSYSurfaceListener(IIJKSurfaceListener surfaceListener) {
         setSurfaceTextureListener(this);
-        mIGSYSurfaceListener = surfaceListener;
+        mIIJKSurfaceListener = surfaceListener;
     }
 
     @Override
@@ -156,11 +156,11 @@ public class GSYTextureView extends TextureView implements TextureView.SurfaceTe
      * @param shotHigh 是否需要高清的
      */
     @Override
-    public void taskShotPic(GSYVideoShotListener gsyVideoShotListener, boolean shotHigh) {
+    public void taskShotPic(IJKVideoShotListener IJKVideoShotListener, boolean shotHigh) {
         if (shotHigh) {
-            gsyVideoShotListener.getBitmap(initCoverHigh());
+            IJKVideoShotListener.getBitmap(initCoverHigh());
         } else {
-            gsyVideoShotListener.getBitmap(initCover());
+            IJKVideoShotListener.getBitmap(initCover());
         }
     }
 
@@ -170,22 +170,22 @@ public class GSYTextureView extends TextureView implements TextureView.SurfaceTe
      * @param high 是否需要高清的
      */
     @Override
-    public void saveFrame(final File file, final boolean high, final GSYVideoShotSaveListener gsyVideoShotSaveListener) {
-        GSYVideoShotListener gsyVideoShotListener = new GSYVideoShotListener() {
+    public void saveFrame(final File file, final boolean high, final IJKVideoShotSaveListener IJKVideoShotSaveListener) {
+        IJKVideoShotListener IJKVideoShotListener = new IJKVideoShotListener() {
             @Override
             public void getBitmap(Bitmap bitmap) {
                 if (bitmap == null) {
-                    gsyVideoShotSaveListener.result(false, file);
+                    IJKVideoShotSaveListener.result(false, file);
                 } else {
                     FileUtils.saveBitmap(bitmap, file);
-                    gsyVideoShotSaveListener.result(true, file);
+                    IJKVideoShotSaveListener.result(true, file);
                 }
             }
         };
         if (high) {
-            gsyVideoShotListener.getBitmap(initCoverHigh());
+            IJKVideoShotListener.getBitmap(initCoverHigh());
         } else {
-            gsyVideoShotListener.getBitmap(initCover());
+            IJKVideoShotListener.getBitmap(initCover());
         }
 
     }
@@ -218,7 +218,7 @@ public class GSYTextureView extends TextureView implements TextureView.SurfaceTe
     }
 
     @Override
-    public void setGLRenderer(GSYVideoGLViewBaseRender renderer) {
+    public void setGLRenderer(IJKVideoGLViewBaseRender renderer) {
     }
 
     @Override
@@ -229,7 +229,7 @@ public class GSYTextureView extends TextureView implements TextureView.SurfaceTe
      * 设置滤镜效果
      */
     @Override
-    public void setGLEffectFilter(GSYVideoGLView.ShaderInterface effectFilter) {
+    public void setGLEffectFilter(IJKVideoGLView.ShaderInterface effectFilter) {
     }
 
 
@@ -274,17 +274,17 @@ public class GSYTextureView extends TextureView implements TextureView.SurfaceTe
     /**
      * 添加播放的view
      */
-    public static GSYTextureView addTextureView(Context context, ViewGroup textureViewContainer, int rotate,
-                                                final IGSYSurfaceListener gsySurfaceListener,
+    public static IJKTextureView addTextureView(Context context, ViewGroup textureViewContainer, int rotate,
+                                                final IIJKSurfaceListener gsySurfaceListener,
                                                 final MeasureHelper.MeasureFormVideoParamsListener videoParamsListener) {
         if (textureViewContainer.getChildCount() > 0) {
             textureViewContainer.removeAllViews();
         }
-        GSYTextureView gsyTextureView = new GSYTextureView(context);
-        gsyTextureView.setIGSYSurfaceListener(gsySurfaceListener);
-        gsyTextureView.setVideoParamsListener(videoParamsListener);
-        gsyTextureView.setRotation(rotate);
-        GSYRenderView.addToParent(textureViewContainer, gsyTextureView);
-        return gsyTextureView;
+        IJKTextureView IJKTextureView = new IJKTextureView(context);
+        IJKTextureView.setIGSYSurfaceListener(gsySurfaceListener);
+        IJKTextureView.setVideoParamsListener(videoParamsListener);
+        IJKTextureView.setRotation(rotate);
+        IJKRenderView.addToParent(textureViewContainer, IJKTextureView);
+        return IJKTextureView;
     }
 }

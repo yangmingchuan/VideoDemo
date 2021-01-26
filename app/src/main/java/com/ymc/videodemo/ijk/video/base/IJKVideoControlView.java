@@ -23,8 +23,8 @@ import androidx.annotation.Nullable;
 
 
 import com.ymc.videodemo.R;
-import com.ymc.videodemo.ijk.listener.GSYStateUiListener;
-import com.ymc.videodemo.ijk.listener.GSYVideoProgressListener;
+import com.ymc.videodemo.ijk.listener.IJKStateUiListener;
+import com.ymc.videodemo.ijk.listener.IJKVideoProgressListener;
 import com.ymc.videodemo.ijk.listener.LockClickListener;
 import com.ymc.videodemo.ijk.utils.CommonUtil;
 
@@ -39,7 +39,7 @@ import static com.ymc.videodemo.ijk.utils.CommonUtil.hideNavKey;
  * Created by guoshuyu on 2017/8/2.
  */
 
-public abstract class GSYVideoControlView extends GSYVideoView implements View.OnClickListener, View.OnTouchListener, SeekBar.OnSeekBarChangeListener {
+public abstract class IJKVideoControlView extends IJKVideoView implements View.OnClickListener, View.OnTouchListener, SeekBar.OnSeekBarChangeListener {
 
 
     //手指放下的位置
@@ -169,23 +169,23 @@ public abstract class GSYVideoControlView extends GSYVideoView implements View.O
     //点击锁屏的回调
     protected LockClickListener mLockClickListener;
 
-    protected GSYStateUiListener mGsyStateUiListener;
+    protected IJKStateUiListener mIJKStateUiListener;
 
-    protected GSYVideoProgressListener mGSYVideoProgressListener;
+    protected IJKVideoProgressListener mIJKVideoProgressListener;
 
-    public GSYVideoControlView(@NonNull Context context) {
+    public IJKVideoControlView(@NonNull Context context) {
         super(context);
     }
 
-    public GSYVideoControlView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public IJKVideoControlView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public GSYVideoControlView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
+    public IJKVideoControlView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public GSYVideoControlView(Context context, Boolean fullFlag) {
+    public IJKVideoControlView(Context context, Boolean fullFlag) {
         super(context, fullFlag);
     }
 
@@ -354,8 +354,8 @@ public abstract class GSYVideoControlView extends GSYVideoView implements View.O
                 break;
         }
         resolveUIState(state);
-        if (mGsyStateUiListener != null) {
-            mGsyStateUiListener.onStateChanged(state);
+        if (mIJKStateUiListener != null) {
+            mIJKStateUiListener.onStateChanged(state);
         }
     }
 
@@ -402,9 +402,9 @@ public abstract class GSYVideoControlView extends GSYVideoView implements View.O
         } else if (i == R.id.surface_container) {
             if (mVideoAllCallBack != null && isCurrentMediaListener()) {
                 if (mIfCurrentIsFullscreen) {
-                    mVideoAllCallBack.onClickBlankFullscreen(mOriginUrl, mTitle, GSYVideoControlView.this);
+                    mVideoAllCallBack.onClickBlankFullscreen(mOriginUrl, mTitle, IJKVideoControlView.this);
                 } else {
-                    mVideoAllCallBack.onClickBlank(mOriginUrl, mTitle, GSYVideoControlView.this);
+                    mVideoAllCallBack.onClickBlank(mOriginUrl, mTitle, IJKVideoControlView.this);
                 }
             }
             startDismissControlViewTimer();
@@ -908,8 +908,8 @@ public abstract class GSYVideoControlView extends GSYVideoView implements View.O
 
     protected void setProgressAndTime(int progress, int secProgress, int currentTime, int totalTime, boolean forceChange) {
 
-        if (mGSYVideoProgressListener != null && mCurrentState == CURRENT_STATE_PLAYING) {
-            mGSYVideoProgressListener.onProgress(progress, secProgress, currentTime, totalTime);
+        if (mIJKVideoProgressListener != null && mCurrentState == CURRENT_STATE_PLAYING) {
+            mIJKVideoProgressListener.onProgress(progress, secProgress, currentTime, totalTime);
         }
 
         if (mProgressBar == null || mTotalTimeTextView == null || mCurrentTimeTextView == null) {
@@ -1334,8 +1334,8 @@ public abstract class GSYVideoControlView extends GSYVideoView implements View.O
     /**
      * 进度回调
      */
-    public void setGSYVideoProgressListener(GSYVideoProgressListener videoProgressListener) {
-        this.mGSYVideoProgressListener = videoProgressListener;
+    public void setGSYVideoProgressListener(IJKVideoProgressListener videoProgressListener) {
+        this.mIJKVideoProgressListener = videoProgressListener;
     }
 
     public boolean isShowDragProgressTextOnSeekBar() {
@@ -1353,11 +1353,11 @@ public abstract class GSYVideoControlView extends GSYVideoView implements View.O
     /***
      * 状态监听
      */
-    public GSYStateUiListener getGSYStateUiListener() {
-        return mGsyStateUiListener;
+    public IJKStateUiListener getGSYStateUiListener() {
+        return mIJKStateUiListener;
     }
 
-    public void setGSYStateUiListener(GSYStateUiListener gsyStateUiListener) {
-        this.mGsyStateUiListener = gsyStateUiListener;
+    public void setGSYStateUiListener(IJKStateUiListener IJKStateUiListener) {
+        this.mIJKStateUiListener = IJKStateUiListener;
     }
 }

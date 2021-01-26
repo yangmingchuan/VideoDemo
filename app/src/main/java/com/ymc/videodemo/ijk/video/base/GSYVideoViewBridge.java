@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.Surface;
 
 import com.ymc.videodemo.ijk.base.player.IPlayerManager;
-import com.ymc.videodemo.ijk.listener.GSYMediaPlayerListener;
+import com.ymc.videodemo.ijk.listener.IJKMediaPlayerListener;
 
 import java.io.File;
 import java.util.Map;
@@ -16,13 +16,13 @@ import java.util.Map;
 
 public interface GSYVideoViewBridge {
 
-    GSYMediaPlayerListener listener();
+    IJKMediaPlayerListener listener();
 
-    GSYMediaPlayerListener lastListener();
+    IJKMediaPlayerListener lastListener();
 
-    void setListener(GSYMediaPlayerListener listener);
+    void setListener(IJKMediaPlayerListener listener);
 
-    void setLastListener(GSYMediaPlayerListener lastListener);
+    void setLastListener(IJKMediaPlayerListener lastListener);
 
     /**
      * tag和position都是属于标记flag，不参与播放器实际工作，只是用于防止错误等等

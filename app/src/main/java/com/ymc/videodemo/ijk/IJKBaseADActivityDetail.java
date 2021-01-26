@@ -3,21 +3,21 @@ package com.ymc.videodemo.ijk;
 import android.content.res.Configuration;
 import android.view.View;
 
-import com.ymc.videodemo.ijk.builder.GSYVideoOptionBuilder;
-import com.ymc.videodemo.ijk.listener.GSYSampleCallBack;
+import com.ymc.videodemo.ijk.builder.IJKVideoOptionBuilder;
+import com.ymc.videodemo.ijk.listener.IJKSampleCallBack;
 import com.ymc.videodemo.ijk.utils.OrientationOption;
 import com.ymc.videodemo.ijk.utils.OrientationUtils;
-import com.ymc.videodemo.ijk.video.GSYADVideoPlayer;
-import com.ymc.videodemo.ijk.video.base.GSYBaseVideoPlayer;
-import com.ymc.videodemo.ijk.video.base.GSYVideoPlayer;
-import com.ymc.videodemo.ijk.video.base.GSYVideoView;
+import com.ymc.videodemo.ijk.video.IJKADVideoPlayer;
+import com.ymc.videodemo.ijk.video.base.IJKBaseVideoPlayer;
+import com.ymc.videodemo.ijk.video.base.IJKVideoPlayer;
+import com.ymc.videodemo.ijk.video.base.IJKVideoView;
 
 
 /**
  * 详情AD模式播放页面基础类
  * Created by guoshuyu on 2017/9/14.
  */
-public abstract class GSYBaseADActivityDetail<T extends GSYBaseVideoPlayer, R extends GSYADVideoPlayer> extends GSYBaseActivityDetail<T> {
+public abstract class IJKBaseADActivityDetail<T extends IJKBaseVideoPlayer, R extends IJKADVideoPlayer> extends IJKBaseActivityDetail<T> {
 
     protected OrientationUtils mADOrientationUtils;
 
@@ -47,7 +47,7 @@ public abstract class GSYBaseADActivityDetail<T extends GSYBaseVideoPlayer, R ex
     public void initVideoBuilderMode() {
         super.initVideoBuilderMode();
         getGSYADVideoOptionBuilder()
-                .setVideoAllCallBack(new GSYSampleCallBack() {
+                .setVideoAllCallBack(new IJKSampleCallBack() {
 
                     @Override
                     public void onStartPrepared(String url, Object... objects) {
@@ -105,7 +105,7 @@ public abstract class GSYBaseADActivityDetail<T extends GSYBaseVideoPlayer, R ex
         if (mADOrientationUtils != null) {
             mADOrientationUtils.backToProtVideo();
         }
-        if (GSYVideoADManager.backFromWindowFull(this)) {
+        if (IJKVideoADManager.backFromWindowFull(this)) {
             return;
         }
         super.onBackPressed();
@@ -114,19 +114,19 @@ public abstract class GSYBaseADActivityDetail<T extends GSYBaseVideoPlayer, R ex
     @Override
     protected void onPause() {
         super.onPause();
-        GSYVideoADManager.onPause();
+        IJKVideoADManager.onPause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        GSYVideoADManager.onResume();
+        IJKVideoADManager.onResume();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        GSYVideoADManager.releaseAllVideos();
+        IJKVideoADManager.releaseAllVideos();
         if (mADOrientationUtils != null)
             mADOrientationUtils.releaseListener();
     }
@@ -166,7 +166,7 @@ public abstract class GSYBaseADActivityDetail<T extends GSYBaseVideoPlayer, R ex
     public void onEnterFullscreen(String url, Object... objects) {
         super.onEnterFullscreen(url, objects);
         //隐藏调全屏对象的返回按键
-        GSYVideoPlayer gsyVideoPlayer = (GSYVideoPlayer) objects[1];
+        IJKVideoPlayer gsyVideoPlayer = (IJKVideoPlayer) objects[1];
         gsyVideoPlayer.getBackButton().setVisibility(View.GONE);
     }
 
@@ -182,8 +182,8 @@ public abstract class GSYBaseADActivityDetail<T extends GSYBaseVideoPlayer, R ex
 
     protected boolean isADStarted() {
         return getGSYADVideoPlayer().getCurrentPlayer().getCurrentState() >= 0 &&
-                getGSYADVideoPlayer().getCurrentPlayer().getCurrentState() != GSYVideoView.CURRENT_STATE_NORMAL
-                && getGSYADVideoPlayer().getCurrentPlayer().getCurrentState() != GSYVideoView.CURRENT_STATE_AUTO_COMPLETE;
+                getGSYADVideoPlayer().getCurrentPlayer().getCurrentState() != IJKVideoView.CURRENT_STATE_NORMAL
+                && getGSYADVideoPlayer().getCurrentPlayer().getCurrentState() != IJKVideoView.CURRENT_STATE_AUTO_COMPLETE;
     }
 
     /**
@@ -205,7 +205,7 @@ public abstract class GSYBaseADActivityDetail<T extends GSYBaseVideoPlayer, R ex
         if (mADOrientationUtils.getIsLand() != 1) {
             mADOrientationUtils.resolveByClick();
         }
-        getGSYADVideoPlayer().startWindowFullscreen(GSYBaseADActivityDetail.this, hideActionBarWhenFull(), hideStatusBarWhenFull());
+        getGSYADVideoPlayer().startWindowFullscreen(IJKBaseADActivityDetail.this, hideActionBarWhenFull(), hideStatusBarWhenFull());
     }
 
     /**
@@ -221,7 +221,7 @@ public abstract class GSYBaseADActivityDetail<T extends GSYBaseVideoPlayer, R ex
     /**
      * 配置AD播放器
      */
-    public abstract GSYVideoOptionBuilder getGSYADVideoOptionBuilder();
+    public abstract IJKVideoOptionBuilder getGSYADVideoOptionBuilder();
 
     /**
      * 是否播放开始广告

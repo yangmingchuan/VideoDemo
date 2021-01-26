@@ -12,17 +12,17 @@ import com.ymc.videodemo.R;
  * 使用正常播放按键和loading的播放器
  */
 
-public class NormalGSYVideoPlayer extends StandardGSYVideoPlayer {
+public class NormalIJKVideoPlayer extends StandardIJKVideoPlayer {
 
-    public NormalGSYVideoPlayer(Context context, Boolean fullFlag) {
+    public NormalIJKVideoPlayer(Context context, Boolean fullFlag) {
         super(context, fullFlag);
     }
 
-    public NormalGSYVideoPlayer(Context context) {
+    public NormalIJKVideoPlayer(Context context) {
         super(context);
     }
 
-    public NormalGSYVideoPlayer(Context context, AttributeSet attrs) {
+    public NormalIJKVideoPlayer(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

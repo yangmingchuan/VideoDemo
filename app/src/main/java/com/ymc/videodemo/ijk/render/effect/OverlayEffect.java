@@ -2,7 +2,7 @@ package com.ymc.videodemo.ijk.render.effect;
 
 import android.opengl.GLSurfaceView;
 
-import com.ymc.videodemo.ijk.render.view.GSYVideoGLView;
+import com.ymc.videodemo.ijk.render.view.IJKVideoGLView;
 
 
 /**
@@ -10,7 +10,7 @@ import com.ymc.videodemo.ijk.render.view.GSYVideoGLView;
  * Created by guoshuyu on 2017/9/17.
  */
 
-public class OverlayEffect implements GSYVideoGLView.ShaderInterface {
+public class OverlayEffect implements IJKVideoGLView.ShaderInterface {
 
     float fstep = 0.0015f;
 

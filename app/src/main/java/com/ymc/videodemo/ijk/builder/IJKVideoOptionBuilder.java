@@ -3,14 +3,14 @@ package com.ymc.videodemo.ijk.builder;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
-import com.ymc.videodemo.ijk.listener.GSYStateUiListener;
-import com.ymc.videodemo.ijk.listener.GSYVideoProgressListener;
+import com.ymc.videodemo.ijk.listener.IJKStateUiListener;
+import com.ymc.videodemo.ijk.listener.IJKVideoProgressListener;
 import com.ymc.videodemo.ijk.listener.LockClickListener;
 import com.ymc.videodemo.ijk.listener.VideoAllCallBack;
 import com.ymc.videodemo.ijk.render.effect.NoEffect;
-import com.ymc.videodemo.ijk.render.view.GSYVideoGLView;
-import com.ymc.videodemo.ijk.video.StandardGSYVideoPlayer;
-import com.ymc.videodemo.ijk.video.base.GSYBaseVideoPlayer;
+import com.ymc.videodemo.ijk.render.view.IJKVideoGLView;
+import com.ymc.videodemo.ijk.video.StandardIJKVideoPlayer;
+import com.ymc.videodemo.ijk.video.base.IJKBaseVideoPlayer;
 
 import java.io.File;
 import java.util.Map;
@@ -25,7 +25,7 @@ import java.util.Map;
  * 这只是方便使用
  */
 
-public class GSYVideoOptionBuilder {
+public class IJKVideoOptionBuilder {
 
     //退出全屏显示的案件图片
     protected int mShrinkImageRes = -1;
@@ -162,13 +162,13 @@ public class GSYVideoOptionBuilder {
     protected Drawable mDialogProgressBarDrawable;
 
     ///状态监听
-    protected GSYStateUiListener mGSYStateUiListener;
+    protected IJKStateUiListener mIJKStateUiListener;
 
     //滤镜
-    protected GSYVideoGLView.ShaderInterface mEffectFilter = new NoEffect();
+    protected IJKVideoGLView.ShaderInterface mEffectFilter = new NoEffect();
 
     //进度回调
-    protected GSYVideoProgressListener mGSYVideoProgressListener;
+    protected IJKVideoProgressListener mIJKVideoProgressListener;
 
 
     /**
@@ -176,7 +176,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param autoFullWithSize 默认false
      */
-    public GSYVideoOptionBuilder setAutoFullWithSize(boolean autoFullWithSize) {
+    public IJKVideoOptionBuilder setAutoFullWithSize(boolean autoFullWithSize) {
         this.mAutoFullWithSize = autoFullWithSize;
         return this;
     }
@@ -186,7 +186,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param showFullAnimation 是否使用全屏动画效果
      */
-    public GSYVideoOptionBuilder setShowFullAnimation(boolean showFullAnimation) {
+    public IJKVideoOptionBuilder setShowFullAnimation(boolean showFullAnimation) {
         this.mShowFullAnimation = showFullAnimation;
         return this;
     }
@@ -194,7 +194,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 设置循环
      */
-    public GSYVideoOptionBuilder setLooping(boolean looping) {
+    public IJKVideoOptionBuilder setLooping(boolean looping) {
         this.mLooping = looping;
         return this;
     }
@@ -205,7 +205,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param mVideoAllCallBack
      */
-    public GSYVideoOptionBuilder setVideoAllCallBack(VideoAllCallBack mVideoAllCallBack) {
+    public IJKVideoOptionBuilder setVideoAllCallBack(VideoAllCallBack mVideoAllCallBack) {
         this.mVideoAllCallBack = mVideoAllCallBack;
         return this;
     }
@@ -213,7 +213,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 是否开启自动旋转
      */
-    public GSYVideoOptionBuilder setRotateViewAuto(boolean rotateViewAuto) {
+    public IJKVideoOptionBuilder setRotateViewAuto(boolean rotateViewAuto) {
         this.mRotateViewAuto = rotateViewAuto;
         return this;
     }
@@ -221,7 +221,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 一全屏就锁屏横屏，默认false竖屏，可配合setRotateViewAuto使用
      */
-    public GSYVideoOptionBuilder setLockLand(boolean lockLand) {
+    public IJKVideoOptionBuilder setLockLand(boolean lockLand) {
         this.mLockLand = lockLand;
         return this;
     }
@@ -229,7 +229,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 播放速度
      */
-    public GSYVideoOptionBuilder setSpeed(float speed) {
+    public IJKVideoOptionBuilder setSpeed(float speed) {
         this.mSpeed = speed;
         return this;
     }
@@ -238,7 +238,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 变声不变调
      */
-    public GSYVideoOptionBuilder setSoundTouch(boolean soundTouch) {
+    public IJKVideoOptionBuilder setSoundTouch(boolean soundTouch) {
         this.mSounchTouch = soundTouch;
         return this;
     }
@@ -246,7 +246,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 全屏隐藏虚拟按键，默认打开
      */
-    public GSYVideoOptionBuilder setHideKey(boolean hideKey) {
+    public IJKVideoOptionBuilder setHideKey(boolean hideKey) {
         this.mHideKey = hideKey;
         return this;
     }
@@ -255,7 +255,7 @@ public class GSYVideoOptionBuilder {
      * 是否可以滑动界面改变进度，声音等
      * 默认true
      */
-    public GSYVideoOptionBuilder setIsTouchWiget(boolean isTouchWiget) {
+    public IJKVideoOptionBuilder setIsTouchWiget(boolean isTouchWiget) {
         this.mIsTouchWiget = isTouchWiget;
         return this;
     }
@@ -264,7 +264,7 @@ public class GSYVideoOptionBuilder {
      * 是否可以全屏滑动界面改变进度，声音等
      * 默认 true
      */
-    public GSYVideoOptionBuilder setIsTouchWigetFull(boolean isTouchWigetFull) {
+    public IJKVideoOptionBuilder setIsTouchWigetFull(boolean isTouchWigetFull) {
         this.mIsTouchWigetFull = isTouchWigetFull;
         return this;
     }
@@ -273,7 +273,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 是否需要显示流量提示,默认true
      */
-    public GSYVideoOptionBuilder setNeedShowWifiTip(boolean needShowWifiTip) {
+    public IJKVideoOptionBuilder setNeedShowWifiTip(boolean needShowWifiTip) {
         this.mNeedShowWifiTip = needShowWifiTip;
         return this;
     }
@@ -283,7 +283,7 @@ public class GSYVideoOptionBuilder {
      * 必须在setUp之前设置
      * 不设置使用默认
      */
-    public GSYVideoOptionBuilder setEnlargeImageRes(int mEnlargeImageRes) {
+    public IJKVideoOptionBuilder setEnlargeImageRes(int mEnlargeImageRes) {
         this.mEnlargeImageRes = mEnlargeImageRes;
         return this;
     }
@@ -293,7 +293,7 @@ public class GSYVideoOptionBuilder {
      * 必须在setUp之前设置
      * 不设置使用默认
      */
-    public GSYVideoOptionBuilder setShrinkImageRes(int mShrinkImageRes) {
+    public IJKVideoOptionBuilder setShrinkImageRes(int mShrinkImageRes) {
         this.mShrinkImageRes = mShrinkImageRes;
         return this;
     }
@@ -306,7 +306,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param showPauseCover 默认true
      */
-    public GSYVideoOptionBuilder setShowPauseCover(boolean showPauseCover) {
+    public IJKVideoOptionBuilder setShowPauseCover(boolean showPauseCover) {
         this.mShowPauseCover = showPauseCover;
         return this;
     }
@@ -316,7 +316,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param seekRatio 滑动快进的比例，默认1。数值越大，滑动的产生的seek越小
      */
-    public GSYVideoOptionBuilder setSeekRatio(float seekRatio) {
+    public IJKVideoOptionBuilder setSeekRatio(float seekRatio) {
         if (seekRatio < 0) {
             return this;
         }
@@ -329,7 +329,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param rotateWithSystem 默认true
      */
-    public GSYVideoOptionBuilder setRotateWithSystem(boolean rotateWithSystem) {
+    public IJKVideoOptionBuilder setRotateWithSystem(boolean rotateWithSystem) {
         this.mRotateWithSystem = rotateWithSystem;
         return this;
     }
@@ -339,7 +339,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param playTag 保证不重复就好
      */
-    public GSYVideoOptionBuilder setPlayTag(String playTag) {
+    public IJKVideoOptionBuilder setPlayTag(String playTag) {
         this.mPlayTag = playTag;
         return this;
     }
@@ -348,7 +348,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 设置播放位置防止错位
      */
-    public GSYVideoOptionBuilder setPlayPosition(int playPosition) {
+    public IJKVideoOptionBuilder setPlayPosition(int playPosition) {
         this.mPlayPosition = playPosition;
         return this;
     }
@@ -358,7 +358,7 @@ public class GSYVideoOptionBuilder {
      * 目前有时候前几秒有跳动问题，毫秒
      * 需要在startPlayLogic之前，即播放开始之前
      */
-    public GSYVideoOptionBuilder setSeekOnStart(long seekOnStart) {
+    public IJKVideoOptionBuilder setSeekOnStart(long seekOnStart) {
         this.mSeekOnStart = seekOnStart;
         return this;
     }
@@ -368,7 +368,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param url
      */
-    public GSYVideoOptionBuilder setUrl(String url) {
+    public IJKVideoOptionBuilder setUrl(String url) {
         this.mUrl = url;
         return this;
     }
@@ -378,7 +378,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param videoTitle
      */
-    public GSYVideoOptionBuilder setVideoTitle(String videoTitle) {
+    public IJKVideoOptionBuilder setVideoTitle(String videoTitle) {
         this.mVideoTitle = videoTitle;
         return this;
     }
@@ -388,7 +388,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param cacheWithPlay
      */
-    public GSYVideoOptionBuilder setCacheWithPlay(boolean cacheWithPlay) {
+    public IJKVideoOptionBuilder setCacheWithPlay(boolean cacheWithPlay) {
         this.mCacheWithPlay = cacheWithPlay;
         return this;
     }
@@ -398,7 +398,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param startAfterPrepared 默认true，false的时候需要在prepared后调用startAfterPrepared()
      */
-    public GSYVideoOptionBuilder setStartAfterPrepared(boolean startAfterPrepared) {
+    public IJKVideoOptionBuilder setStartAfterPrepared(boolean startAfterPrepared) {
         this.mStartAfterPrepared = startAfterPrepared;
         return this;
     }
@@ -409,7 +409,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param releaseWhenLossAudio 默认true，false的时候只会暂停
      */
-    public GSYVideoOptionBuilder setReleaseWhenLossAudio(boolean releaseWhenLossAudio) {
+    public IJKVideoOptionBuilder setReleaseWhenLossAudio(boolean releaseWhenLossAudio) {
         this.mReleaseWhenLossAudio = releaseWhenLossAudio;
         return this;
     }
@@ -419,7 +419,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param cachePath
      */
-    public GSYVideoOptionBuilder setCachePath(File cachePath) {
+    public IJKVideoOptionBuilder setCachePath(File cachePath) {
         this.mCachePath = cachePath;
         return this;
     }
@@ -429,7 +429,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param mapHeadData
      */
-    public GSYVideoOptionBuilder setMapHeadData(Map<String, String> mapHeadData) {
+    public IJKVideoOptionBuilder setMapHeadData(Map<String, String> mapHeadData) {
         this.mMapHeadData = mapHeadData;
         return this;
     }
@@ -438,8 +438,8 @@ public class GSYVideoOptionBuilder {
     /**
      * 进度回调
      */
-    public GSYVideoOptionBuilder setGSYVideoProgressListener(GSYVideoProgressListener videoProgressListener) {
-        this.mGSYVideoProgressListener = videoProgressListener;
+    public IJKVideoOptionBuilder setGSYVideoProgressListener(IJKVideoProgressListener videoProgressListener) {
+        this.mIJKVideoProgressListener = videoProgressListener;
         return this;
     }
 
@@ -447,7 +447,7 @@ public class GSYVideoOptionBuilder {
     /***
      * 设置封面
      */
-    public GSYVideoOptionBuilder setThumbImageView(View view) {
+    public IJKVideoOptionBuilder setThumbImageView(View view) {
         mThumbImageView = view;
         return this;
     }
@@ -456,7 +456,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 底部进度条-弹出的
      */
-    public GSYVideoOptionBuilder setBottomShowProgressBarDrawable(Drawable drawable, Drawable thumb) {
+    public IJKVideoOptionBuilder setBottomShowProgressBarDrawable(Drawable drawable, Drawable thumb) {
         mBottomShowProgressDrawable = drawable;
         mBottomShowProgressThumbDrawable = thumb;
         return this;
@@ -465,7 +465,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 底部进度条-非弹出
      */
-    public GSYVideoOptionBuilder setBottomProgressBarDrawable(Drawable drawable) {
+    public IJKVideoOptionBuilder setBottomProgressBarDrawable(Drawable drawable) {
         mBottomProgressDrawable = drawable;
         return this;
     }
@@ -473,7 +473,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 声音进度条
      */
-    public GSYVideoOptionBuilder setDialogVolumeProgressBar(Drawable drawable) {
+    public IJKVideoOptionBuilder setDialogVolumeProgressBar(Drawable drawable) {
         mVolumeProgressDrawable = drawable;
         return this;
     }
@@ -482,7 +482,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 中间进度条
      */
-    public GSYVideoOptionBuilder setDialogProgressBar(Drawable drawable) {
+    public IJKVideoOptionBuilder setDialogProgressBar(Drawable drawable) {
         mDialogProgressBarDrawable = drawable;
         return this;
     }
@@ -490,7 +490,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 中间进度条字体颜色
      */
-    public GSYVideoOptionBuilder setDialogProgressColor(int highLightColor, int normalColor) {
+    public IJKVideoOptionBuilder setDialogProgressColor(int highLightColor, int normalColor) {
         mDialogProgressHighLightColor = highLightColor;
         mDialogProgressNormalColor = normalColor;
         return this;
@@ -499,7 +499,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 是否点击封面可以播放
      */
-    public GSYVideoOptionBuilder setThumbPlay(boolean thumbPlay) {
+    public IJKVideoOptionBuilder setThumbPlay(boolean thumbPlay) {
         this.mThumbPlay = thumbPlay;
         return this;
     }
@@ -508,7 +508,7 @@ public class GSYVideoOptionBuilder {
      * 是否需要全屏锁定屏幕功能
      * 如果单独使用请设置setIfCurrentIsFullscreen为true
      */
-    public GSYVideoOptionBuilder setNeedLockFull(boolean needLoadFull) {
+    public IJKVideoOptionBuilder setNeedLockFull(boolean needLoadFull) {
         this.mNeedLockFull = needLoadFull;
         return this;
     }
@@ -516,7 +516,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 锁屏点击
      */
-    public GSYVideoOptionBuilder setLockClickListener(LockClickListener lockClickListener) {
+    public IJKVideoOptionBuilder setLockClickListener(LockClickListener lockClickListener) {
         this.mLockClickListener = lockClickListener;
         return this;
     }
@@ -526,7 +526,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param dismissControlTime 毫秒，默认2500
      */
-    public GSYVideoOptionBuilder setDismissControlTime(int dismissControlTime) {
+    public IJKVideoOptionBuilder setDismissControlTime(int dismissControlTime) {
         this.mDismissControlTime = dismissControlTime;
         return this;
     }
@@ -534,7 +534,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 设置滤镜效果
      */
-    public GSYVideoOptionBuilder setEffectFilter(GSYVideoGLView.ShaderInterface effectFilter) {
+    public IJKVideoOptionBuilder setEffectFilter(IJKVideoGLView.ShaderInterface effectFilter) {
         this.mEffectFilter = effectFilter;
         return this;
     }
@@ -544,18 +544,18 @@ public class GSYVideoOptionBuilder {
      *
      * @param overrideExtension 比如传入 m3u8,mp4,avi 等类型
      */
-    public GSYVideoOptionBuilder setOverrideExtension(String overrideExtension) {
+    public IJKVideoOptionBuilder setOverrideExtension(String overrideExtension) {
         this.mOverrideExtension = overrideExtension;
         return this;
     }
 
 
-    public GSYVideoOptionBuilder setOnlyRotateLand(boolean onlyRotateLand) {
+    public IJKVideoOptionBuilder setOnlyRotateLand(boolean onlyRotateLand) {
         this.mIsOnlyRotateLand = onlyRotateLand;
         return this;
     }
 
-    public GSYVideoOptionBuilder setShowDragProgressTextOnSeekBar(boolean isShowDragProgressTextOnSeekBar) {
+    public IJKVideoOptionBuilder setShowDragProgressTextOnSeekBar(boolean isShowDragProgressTextOnSeekBar) {
         this.isShowDragProgressTextOnSeekBar = isShowDragProgressTextOnSeekBar;
         return this;
     }
@@ -565,17 +565,17 @@ public class GSYVideoOptionBuilder {
      * 目前弃用，请使用正常setup
      */
     @Deprecated
-    public GSYVideoOptionBuilder setSetUpLazy(boolean setUpLazy) {
+    public IJKVideoOptionBuilder setSetUpLazy(boolean setUpLazy) {
         this.mSetUpLazy = setUpLazy;
         return this;
     }
 
-    public GSYVideoOptionBuilder setFullHideActionBar(boolean actionBar) {
+    public IJKVideoOptionBuilder setFullHideActionBar(boolean actionBar) {
         this.mActionBar = actionBar;
         return this;
     }
 
-    public GSYVideoOptionBuilder setFullHideStatusBar(boolean statusBar) {
+    public IJKVideoOptionBuilder setFullHideStatusBar(boolean statusBar) {
         this.mStatusBar = statusBar;
         return this;
     }
@@ -583,12 +583,12 @@ public class GSYVideoOptionBuilder {
     /***
      * 状态监听
      */
-    public GSYVideoOptionBuilder setGSYStateUiListener(GSYStateUiListener gsyStateUiListener) {
-        this.mGSYStateUiListener = gsyStateUiListener;
+    public IJKVideoOptionBuilder setGSYStateUiListener(IJKStateUiListener IJKStateUiListener) {
+        this.mIJKStateUiListener = IJKStateUiListener;
         return this;
     }
 
-    public void build(StandardGSYVideoPlayer gsyVideoPlayer) {
+    public void build(StandardIJKVideoPlayer gsyVideoPlayer) {
         if (mBottomShowProgressDrawable != null && mBottomShowProgressThumbDrawable != null) {
             gsyVideoPlayer.setBottomShowProgressBarDrawable(mBottomShowProgressDrawable, mBottomShowProgressThumbDrawable);
         }
@@ -607,10 +607,10 @@ public class GSYVideoOptionBuilder {
             gsyVideoPlayer.setDialogProgressColor(mDialogProgressHighLightColor, mDialogProgressNormalColor);
         }
 
-        build((GSYBaseVideoPlayer) gsyVideoPlayer);
+        build((IJKBaseVideoPlayer) gsyVideoPlayer);
     }
 
-    public void build(GSYBaseVideoPlayer gsyVideoPlayer) {
+    public void build(IJKBaseVideoPlayer gsyVideoPlayer) {
         gsyVideoPlayer.setPlayTag(mPlayTag);
         gsyVideoPlayer.setPlayPosition(mPlayPosition);
 
@@ -638,11 +638,11 @@ public class GSYVideoOptionBuilder {
         if (mVideoAllCallBack != null) {
             gsyVideoPlayer.setVideoAllCallBack(mVideoAllCallBack);
         }
-        if (mGSYVideoProgressListener != null) {
-            gsyVideoPlayer.setGSYVideoProgressListener(mGSYVideoProgressListener);
+        if (mIJKVideoProgressListener != null) {
+            gsyVideoPlayer.setGSYVideoProgressListener(mIJKVideoProgressListener);
         }
-        if (mGSYStateUiListener != null) {
-            gsyVideoPlayer.setGSYStateUiListener(mGSYStateUiListener);
+        if (mIJKStateUiListener != null) {
+            gsyVideoPlayer.setGSYStateUiListener(mIJKStateUiListener);
         }
         gsyVideoPlayer.setOverrideExtension(mOverrideExtension);
         gsyVideoPlayer.setAutoFullWithSize(mAutoFullWithSize);

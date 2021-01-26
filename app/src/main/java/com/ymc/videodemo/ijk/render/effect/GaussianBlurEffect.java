@@ -2,14 +2,14 @@ package com.ymc.videodemo.ijk.render.effect;
 
 import android.opengl.GLSurfaceView;
 
-import com.ymc.videodemo.ijk.render.view.GSYVideoGLView;
+import com.ymc.videodemo.ijk.render.view.IJKVideoGLView;
 
 
 /**
  * 高斯模糊
  * Created by guoshuyu on 2017/9/17.
  */
-public class GaussianBlurEffect implements GSYVideoGLView.ShaderInterface {
+public class GaussianBlurEffect implements IJKVideoGLView.ShaderInterface {
     public final static int TYPEX = 1;
     public final static int TYPEY = 2;
     public final static int TYPEXY = 3;

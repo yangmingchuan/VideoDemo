@@ -3,7 +3,7 @@ package com.ymc.videodemo.ijk.video.base;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.ymc.videodemo.ijk.GSYVideoManager;
+import com.ymc.videodemo.ijk.IJKVideoManager;
 
 
 /**
@@ -11,21 +11,21 @@ import com.ymc.videodemo.ijk.GSYVideoManager;
  * Created by shuyu on 2016/11/11.
  */
 
-public abstract class GSYVideoPlayer extends GSYBaseVideoPlayer {
+public abstract class IJKVideoPlayer extends IJKBaseVideoPlayer {
 
-    public GSYVideoPlayer(Context context, Boolean fullFlag) {
+    public IJKVideoPlayer(Context context, Boolean fullFlag) {
         super(context, fullFlag);
     }
 
-    public GSYVideoPlayer(Context context) {
+    public IJKVideoPlayer(Context context) {
         super(context);
     }
 
-    public GSYVideoPlayer(Context context, AttributeSet attrs) {
+    public IJKVideoPlayer(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public GSYVideoPlayer(Context context, AttributeSet attrs, int defStyleAttr) {
+    public IJKVideoPlayer(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -33,28 +33,28 @@ public abstract class GSYVideoPlayer extends GSYBaseVideoPlayer {
 
     @Override
     public GSYVideoViewBridge getGSYVideoManager() {
-        GSYVideoManager.instance().initContext(getContext().getApplicationContext());
-        return GSYVideoManager.instance();
+        IJKVideoManager.instance().initContext(getContext().getApplicationContext());
+        return IJKVideoManager.instance();
     }
 
     @Override
     protected boolean backFromFull(Context context) {
-        return GSYVideoManager.backFromWindowFull(context);
+        return IJKVideoManager.backFromWindowFull(context);
     }
 
     @Override
     protected void releaseVideos() {
-        GSYVideoManager.releaseAllVideos();
+        IJKVideoManager.releaseAllVideos();
     }
 
     @Override
     protected int getFullId() {
-        return GSYVideoManager.FULLSCREEN_ID;
+        return IJKVideoManager.FULLSCREEN_ID;
     }
 
     @Override
     protected int getSmallId() {
-        return GSYVideoManager.SMALL_ID;
+        return IJKVideoManager.SMALL_ID;
     }
 
 }

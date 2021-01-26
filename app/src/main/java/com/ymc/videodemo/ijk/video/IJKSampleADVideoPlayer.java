@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.ymc.videodemo.R;
 import com.ymc.videodemo.ijk.model.GSYVideoModel;
 import com.ymc.videodemo.ijk.utils.CommonUtil;
-import com.ymc.videodemo.ijk.video.base.GSYBaseVideoPlayer;
+import com.ymc.videodemo.ijk.video.base.IJKBaseVideoPlayer;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ import java.util.Map;
  * Created by guoshuyu on 2018/1/26.
  */
 
-public class GSYSampleADVideoPlayer extends ListGSYVideoPlayer {
+public class IJKSampleADVideoPlayer extends ListIJKVideoPlayer {
 
     protected View mJumpAd;
 
@@ -38,15 +38,15 @@ public class GSYSampleADVideoPlayer extends ListGSYVideoPlayer {
 
     protected boolean isFirstPrepared = false;
 
-    public GSYSampleADVideoPlayer(Context context, Boolean fullFlag) {
+    public IJKSampleADVideoPlayer(Context context, Boolean fullFlag) {
         super(context, fullFlag);
     }
 
-    public GSYSampleADVideoPlayer(Context context) {
+    public IJKSampleADVideoPlayer(Context context) {
         super(context);
     }
 
-    public GSYSampleADVideoPlayer(Context context, AttributeSet attrs) {
+    public IJKSampleADVideoPlayer(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -234,10 +234,10 @@ public class GSYSampleADVideoPlayer extends ListGSYVideoPlayer {
     }
 
     @Override
-    protected void cloneParams(GSYBaseVideoPlayer from, GSYBaseVideoPlayer to) {
+    protected void cloneParams(IJKBaseVideoPlayer from, IJKBaseVideoPlayer to) {
         super.cloneParams(from, to);
-        GSYSampleADVideoPlayer sf = (GSYSampleADVideoPlayer) from;
-        GSYSampleADVideoPlayer st = (GSYSampleADVideoPlayer) to;
+        IJKSampleADVideoPlayer sf = (IJKSampleADVideoPlayer) from;
+        IJKSampleADVideoPlayer st = (IJKSampleADVideoPlayer) to;
         st.isAdModel = sf.isAdModel;
         st.isFirstPrepared = sf.isFirstPrepared;
         st.changeAdUIState();

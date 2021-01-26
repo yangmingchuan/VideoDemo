@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 
 import com.ymc.videodemo.ijk.base.ENDownloadView;
 import com.ymc.videodemo.ijk.model.GSYVideoModel;
-import com.ymc.videodemo.ijk.video.base.GSYBaseVideoPlayer;
-import com.ymc.videodemo.ijk.video.base.GSYVideoPlayer;
+import com.ymc.videodemo.ijk.video.base.IJKBaseVideoPlayer;
+import com.ymc.videodemo.ijk.video.base.IJKVideoPlayer;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import java.util.Map;
  * Created by shuyu on 2016/12/20.
  */
 
-public class ListGSYVideoPlayer extends StandardGSYVideoPlayer {
+public class ListIJKVideoPlayer extends StandardIJKVideoPlayer {
 
     protected List<GSYVideoModel> mUriList = new ArrayList<>();
     protected int mPlayPosition;
@@ -32,15 +32,15 @@ public class ListGSYVideoPlayer extends StandardGSYVideoPlayer {
     /**
      * 1.5.0开始加入，如果需要不同布局区分功能，需要重载
      */
-    public ListGSYVideoPlayer(Context context, Boolean fullFlag) {
+    public ListIJKVideoPlayer(Context context, Boolean fullFlag) {
         super(context, fullFlag);
     }
 
-    public ListGSYVideoPlayer(Context context) {
+    public ListIJKVideoPlayer(Context context) {
         super(context);
     }
 
-    public ListGSYVideoPlayer(Context context, AttributeSet attrs) {
+    public ListIJKVideoPlayer(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -109,19 +109,19 @@ public class ListGSYVideoPlayer extends StandardGSYVideoPlayer {
 
 
     @Override
-    protected void cloneParams(GSYBaseVideoPlayer from, GSYBaseVideoPlayer to) {
+    protected void cloneParams(IJKBaseVideoPlayer from, IJKBaseVideoPlayer to) {
         super.cloneParams(from, to);
-        ListGSYVideoPlayer sf = (ListGSYVideoPlayer) from;
-        ListGSYVideoPlayer st = (ListGSYVideoPlayer) to;
+        ListIJKVideoPlayer sf = (ListIJKVideoPlayer) from;
+        ListIJKVideoPlayer st = (ListIJKVideoPlayer) to;
         st.mPlayPosition = sf.mPlayPosition;
         st.mUriList = sf.mUriList;
     }
 
     @Override
-    public GSYBaseVideoPlayer startWindowFullscreen(Context context, boolean actionBar, boolean statusBar) {
-        GSYBaseVideoPlayer gsyBaseVideoPlayer = super.startWindowFullscreen(context, actionBar, statusBar);
+    public IJKBaseVideoPlayer startWindowFullscreen(Context context, boolean actionBar, boolean statusBar) {
+        IJKBaseVideoPlayer gsyBaseVideoPlayer = super.startWindowFullscreen(context, actionBar, statusBar);
         if (gsyBaseVideoPlayer != null) {
-            ListGSYVideoPlayer listGSYVideoPlayer = (ListGSYVideoPlayer) gsyBaseVideoPlayer;
+            ListIJKVideoPlayer listGSYVideoPlayer = (ListIJKVideoPlayer) gsyBaseVideoPlayer;
             GSYVideoModel gsyVideoModel = mUriList.get(mPlayPosition);
             if (!TextUtils.isEmpty(gsyVideoModel.getTitle()) && mTitleTextView != null) {
                 listGSYVideoPlayer.mTitleTextView.setText(gsyVideoModel.getTitle());
@@ -131,9 +131,9 @@ public class ListGSYVideoPlayer extends StandardGSYVideoPlayer {
     }
 
     @Override
-    protected void resolveNormalVideoShow(View oldF, ViewGroup vp, GSYVideoPlayer gsyVideoPlayer) {
+    protected void resolveNormalVideoShow(View oldF, ViewGroup vp, IJKVideoPlayer gsyVideoPlayer) {
         if (gsyVideoPlayer != null) {
-            ListGSYVideoPlayer listGSYVideoPlayer = (ListGSYVideoPlayer) gsyVideoPlayer;
+            ListIJKVideoPlayer listGSYVideoPlayer = (ListIJKVideoPlayer) gsyVideoPlayer;
             GSYVideoModel gsyVideoModel = mUriList.get(mPlayPosition);
             if (!TextUtils.isEmpty(gsyVideoModel.getTitle()) && mTitleTextView != null) {
                 mTitleTextView.setText(gsyVideoModel.getTitle());

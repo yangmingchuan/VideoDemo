@@ -7,9 +7,9 @@ import android.opengl.GLES20;
 import android.opengl.Matrix;
 import android.view.Surface;
 
-import com.ymc.videodemo.ijk.listener.GSYVideoShotListener;
+import com.ymc.videodemo.ijk.listener.IJKVideoShotListener;
 import com.ymc.videodemo.ijk.render.effect.NoEffect;
-import com.ymc.videodemo.ijk.render.view.GSYVideoGLView;
+import com.ymc.videodemo.ijk.render.view.IJKVideoGLView;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -25,7 +25,7 @@ import javax.microedition.khronos.opengles.GL10;
  * 原 @author sheraz.khilji
  */
 @SuppressLint("ViewConstructor")
-public class GSYVideoGLViewSimpleRender extends GSYVideoGLViewBaseRender {
+public class IJKVideoGLViewSimpleRender extends IJKVideoGLViewBaseRender {
 
     private static final int FLOAT_SIZE_BYTES = 4;
 
@@ -77,11 +77,11 @@ public class GSYVideoGLViewSimpleRender extends GSYVideoGLViewBaseRender {
 
     private SurfaceTexture mSurface;
 
-    private GSYVideoShotListener mGSYVideoShotListener;
+    private IJKVideoShotListener mIJKVideoShotListener;
 
-    private GSYVideoGLView.ShaderInterface mEffect = new NoEffect();
+    private IJKVideoGLView.ShaderInterface mEffect = new NoEffect();
 
-    public GSYVideoGLViewSimpleRender() {
+    public IJKVideoGLViewSimpleRender() {
         mTriangleVertices = ByteBuffer
                 .allocateDirect(
                         mTriangleVerticesData.length * FLOAT_SIZE_BYTES)
@@ -194,7 +194,7 @@ public class GSYVideoGLViewSimpleRender extends GSYVideoGLViewBaseRender {
      * @param shaderEffect
      */
     @Override
-    public void setEffect(GSYVideoGLView.ShaderInterface shaderEffect) {
+    public void setEffect(IJKVideoGLView.ShaderInterface shaderEffect) {
         if (shaderEffect != null) {
             mEffect = shaderEffect;
         }
@@ -203,7 +203,7 @@ public class GSYVideoGLViewSimpleRender extends GSYVideoGLViewBaseRender {
     }
 
     @Override
-    public GSYVideoGLView.ShaderInterface getEffect() {
+    public IJKVideoGLView.ShaderInterface getEffect() {
         return mEffect;
     }
 
@@ -230,9 +230,9 @@ public class GSYVideoGLViewSimpleRender extends GSYVideoGLViewBaseRender {
     protected void takeBitmap(GL10 glUnused) {
         if (mTakeShotPic) {
             mTakeShotPic = false;
-            if (mGSYVideoShotListener != null) {
+            if (mIJKVideoShotListener != null) {
                 Bitmap bitmap = createBitmapFromGLSurface(0, 0, mSurfaceView.getWidth(), mSurfaceView.getHeight(), glUnused);
-                mGSYVideoShotListener.getBitmap(bitmap);
+                mIJKVideoShotListener.getBitmap(bitmap);
             }
         }
     }
@@ -310,8 +310,8 @@ public class GSYVideoGLViewSimpleRender extends GSYVideoGLViewBaseRender {
     /**
      * 截图监听
      */
-    public void setGSYVideoShotListener(GSYVideoShotListener listener, boolean high) {
-        this.mGSYVideoShotListener = listener;
+    public void setGSYVideoShotListener(IJKVideoShotListener listener, boolean high) {
+        this.mIJKVideoShotListener = listener;
         this.mHighShot = high;
     }
 }

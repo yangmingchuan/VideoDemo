@@ -3,13 +3,13 @@ package com.ymc.videodemo.ijk.render.effect;
 import android.opengl.GLSurfaceView;
 
 
-import com.ymc.videodemo.ijk.render.view.GSYVideoGLView;
+import com.ymc.videodemo.ijk.render.view.IJKVideoGLView;
 /**
  * Inverts the video colors. This can also be known as negative Effect.
  *
  * @author sheraz.khilji
  */
-public class InvertColorsEffect implements GSYVideoGLView.ShaderInterface {
+public class InvertColorsEffect implements IJKVideoGLView.ShaderInterface {
     /**
      * Initialize Effect
      */

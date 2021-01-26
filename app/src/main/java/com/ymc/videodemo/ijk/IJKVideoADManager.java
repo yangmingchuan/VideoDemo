@@ -10,7 +10,7 @@ import android.view.Window;
 
 import com.ymc.videodemo.R;
 import com.ymc.videodemo.ijk.utils.CommonUtil;
-import com.ymc.videodemo.ijk.video.base.GSYVideoPlayer;
+import com.ymc.videodemo.ijk.video.base.IJKVideoPlayer;
 
 import static com.ymc.videodemo.ijk.utils.CommonUtil.hideNavKey;
 
@@ -20,7 +20,7 @@ import static com.ymc.videodemo.ijk.utils.CommonUtil.hideNavKey;
  * Created by shuyu on 2018/01/26.
  */
 
-public class GSYVideoADManager extends GSYVideoBaseManager {
+public class IJKVideoADManager extends IJKVideoBaseManager {
 
     public static final int SMALL_ID = R.id.ad_small_id;
 
@@ -29,20 +29,20 @@ public class GSYVideoADManager extends GSYVideoBaseManager {
     public static String TAG = "GSYVideoADManager";
 
     @SuppressLint("StaticFieldLeak")
-    private static GSYVideoADManager videoManager;
+    private static IJKVideoADManager videoManager;
 
 
 
-    private GSYVideoADManager() {
+    private IJKVideoADManager() {
         init();
     }
 
     /**
      * 单例管理器
      */
-    public static synchronized GSYVideoADManager instance() {
+    public static synchronized IJKVideoADManager instance() {
         if (videoManager == null) {
-            videoManager = new GSYVideoADManager();
+            videoManager = new IJKVideoADManager();
         }
         return videoManager;
     }
@@ -60,8 +60,8 @@ public class GSYVideoADManager extends GSYVideoBaseManager {
         if (oldF != null) {
             backFrom = true;
             hideNavKey(context);
-            if (GSYVideoADManager.instance().lastListener() != null) {
-                GSYVideoADManager.instance().lastListener().onBackFullscreen();
+            if (IJKVideoADManager.instance().lastListener() != null) {
+                IJKVideoADManager.instance().lastListener().onBackFullscreen();
             }
         }
         return backFrom;
@@ -71,10 +71,10 @@ public class GSYVideoADManager extends GSYVideoBaseManager {
      * 页面销毁了记得调用是否所有的video
      */
     public static void releaseAllVideos() {
-        if (GSYVideoADManager.instance().listener() != null) {
-            GSYVideoADManager.instance().listener().onCompletion();
+        if (IJKVideoADManager.instance().listener() != null) {
+            IJKVideoADManager.instance().listener().onCompletion();
         }
-        GSYVideoADManager.instance().releaseMediaPlayer();
+        IJKVideoADManager.instance().releaseMediaPlayer();
     }
 
 
@@ -82,8 +82,8 @@ public class GSYVideoADManager extends GSYVideoBaseManager {
      * 暂停播放
      */
     public static void onPause() {
-        if (GSYVideoADManager.instance().listener() != null) {
-            GSYVideoADManager.instance().listener().onVideoPause();
+        if (IJKVideoADManager.instance().listener() != null) {
+            IJKVideoADManager.instance().listener().onVideoPause();
         }
     }
 
@@ -91,8 +91,8 @@ public class GSYVideoADManager extends GSYVideoBaseManager {
      * 恢复播放
      */
     public static void onResume() {
-        if (GSYVideoADManager.instance().listener() != null) {
-            GSYVideoADManager.instance().listener().onVideoResume();
+        if (IJKVideoADManager.instance().listener() != null) {
+            IJKVideoADManager.instance().listener().onVideoResume();
         }
     }
 
@@ -103,8 +103,8 @@ public class GSYVideoADManager extends GSYVideoBaseManager {
      * @param seek 是否产生seek动作,直播设置为false
      */
     public static void onResume(boolean seek) {
-        if (GSYVideoManager.instance().listener() != null) {
-            GSYVideoManager.instance().listener().onVideoResume(seek);
+        if (IJKVideoManager.instance().listener() != null) {
+            IJKVideoManager.instance().listener().onVideoResume(seek);
         }
     }
 
@@ -117,9 +117,9 @@ public class GSYVideoADManager extends GSYVideoBaseManager {
     public static boolean isFullState(Activity activity) {
         ViewGroup vp = (ViewGroup) (CommonUtil.scanForActivity(activity)).findViewById(Window.ID_ANDROID_CONTENT);
         final View full = vp.findViewById(FULLSCREEN_ID);
-        GSYVideoPlayer gsyVideoPlayer = null;
+        IJKVideoPlayer gsyVideoPlayer = null;
         if (full != null) {
-            gsyVideoPlayer = (GSYVideoPlayer) full;
+            gsyVideoPlayer = (IJKVideoPlayer) full;
         }
         return gsyVideoPlayer != null;
     }

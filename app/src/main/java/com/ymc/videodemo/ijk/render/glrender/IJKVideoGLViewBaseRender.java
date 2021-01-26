@@ -10,10 +10,10 @@ import android.opengl.Matrix;
 import android.os.Handler;
 import android.view.Surface;
 
-import com.ymc.videodemo.ijk.listener.GSYVideoShotListener;
-import com.ymc.videodemo.ijk.render.view.GSYVideoGLView;
+import com.ymc.videodemo.ijk.listener.IJKVideoShotListener;
+import com.ymc.videodemo.ijk.render.view.IJKVideoGLView;
 import com.ymc.videodemo.ijk.render.view.listener.GLSurfaceListener;
-import com.ymc.videodemo.ijk.render.view.listener.GSYVideoGLRenderErrorListener;
+import com.ymc.videodemo.ijk.render.view.listener.IJKVideoGLRenderErrorListener;
 
 import java.nio.IntBuffer;
 
@@ -24,7 +24,7 @@ import javax.microedition.khronos.opengles.GL10;
  *
  */
 @SuppressLint("ViewConstructor")
-public abstract class GSYVideoGLViewBaseRender implements GLSurfaceView.Renderer, SurfaceTexture.OnFrameAvailableListener {
+public abstract class IJKVideoGLViewBaseRender implements GLSurfaceView.Renderer, SurfaceTexture.OnFrameAvailableListener {
 
     //是否需要高清截图
     protected boolean mHighShot = false;
@@ -49,7 +49,7 @@ public abstract class GSYVideoGLViewBaseRender implements GLSurfaceView.Renderer
 
     protected boolean mChangeProgramSupportError = false;
 
-    protected GSYVideoGLRenderErrorListener mGSYVideoGLRenderErrorListener;
+    protected IJKVideoGLRenderErrorListener mGSYVideoGLRenderErrorListener;
 
     protected Handler mHandler = new Handler();
 
@@ -122,7 +122,7 @@ public abstract class GSYVideoGLViewBaseRender implements GLSurfaceView.Renderer
                 @Override
                 public void run() {
                     if (mGSYVideoGLRenderErrorListener != null) {
-                        mGSYVideoGLRenderErrorListener.onError(GSYVideoGLViewBaseRender.this, op + ": glError " + error, error, mChangeProgramSupportError);
+                        mGSYVideoGLRenderErrorListener.onError(IJKVideoGLViewBaseRender.this, op + ": glError " + error, error, mChangeProgramSupportError);
                     }
                     mChangeProgramSupportError = false;
                 }
@@ -190,7 +190,7 @@ public abstract class GSYVideoGLViewBaseRender implements GLSurfaceView.Renderer
     /**
      * 截图监听
      */
-    public void setGSYVideoShotListener(GSYVideoShotListener listener, boolean high) {
+    public void setGSYVideoShotListener(IJKVideoShotListener listener, boolean high) {
     }
 
     /**
@@ -198,11 +198,11 @@ public abstract class GSYVideoGLViewBaseRender implements GLSurfaceView.Renderer
      *
      * @param shaderEffect
      */
-    public void setEffect(GSYVideoGLView.ShaderInterface shaderEffect) {
+    public void setEffect(IJKVideoGLView.ShaderInterface shaderEffect) {
     }
 
 
-    public GSYVideoGLView.ShaderInterface getEffect() {
+    public IJKVideoGLView.ShaderInterface getEffect() {
         return null;
     }
 
@@ -246,7 +246,7 @@ public abstract class GSYVideoGLViewBaseRender implements GLSurfaceView.Renderer
         }
     }
 
-    public void setGSYVideoGLRenderErrorListener(GSYVideoGLRenderErrorListener videoGLRenderErrorListener) {
+    public void setGSYVideoGLRenderErrorListener(IJKVideoGLRenderErrorListener videoGLRenderErrorListener) {
         this.mGSYVideoGLRenderErrorListener = videoGLRenderErrorListener;
     }
 }

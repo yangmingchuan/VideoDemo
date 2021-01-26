@@ -10,9 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ymc.videodemo.R;
-import com.ymc.videodemo.ijk.GSYVideoADManager;
+import com.ymc.videodemo.ijk.IJKVideoADManager;
 import com.ymc.videodemo.ijk.utils.CommonUtil;
-import com.ymc.videodemo.ijk.video.base.GSYBaseVideoPlayer;
+import com.ymc.videodemo.ijk.video.base.IJKBaseVideoPlayer;
 import com.ymc.videodemo.ijk.video.base.GSYVideoViewBridge;
 
 
@@ -20,7 +20,7 @@ import com.ymc.videodemo.ijk.video.base.GSYVideoViewBridge;
  * Created by guoshuyu on 2018/2/1.
  */
 
-public class GSYADVideoPlayer extends StandardGSYVideoPlayer {
+public class IJKADVideoPlayer extends StandardIJKVideoPlayer {
 
     protected View mJumpAd;
 
@@ -28,15 +28,15 @@ public class GSYADVideoPlayer extends StandardGSYVideoPlayer {
 
     protected boolean isFirstPrepared;
 
-    public GSYADVideoPlayer(Context context, Boolean fullFlag) {
+    public IJKADVideoPlayer(Context context, Boolean fullFlag) {
         super(context, fullFlag);
     }
 
-    public GSYADVideoPlayer(Context context) {
+    public IJKADVideoPlayer(Context context) {
         super(context);
     }
 
-    public GSYADVideoPlayer(Context context, AttributeSet attrs) {
+    public IJKADVideoPlayer(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -64,28 +64,28 @@ public class GSYADVideoPlayer extends StandardGSYVideoPlayer {
 
     @Override
     public GSYVideoViewBridge getGSYVideoManager() {
-        GSYVideoADManager.instance().initContext(getContext().getApplicationContext());
-        return GSYVideoADManager.instance();
+        IJKVideoADManager.instance().initContext(getContext().getApplicationContext());
+        return IJKVideoADManager.instance();
     }
 
     @Override
     protected boolean backFromFull(Context context) {
-        return GSYVideoADManager.backFromWindowFull(context);
+        return IJKVideoADManager.backFromWindowFull(context);
     }
 
     @Override
     protected void releaseVideos() {
-        GSYVideoADManager.releaseAllVideos();
+        IJKVideoADManager.releaseAllVideos();
     }
 
     @Override
     protected int getFullId() {
-        return GSYVideoADManager.FULLSCREEN_ID;
+        return IJKVideoADManager.FULLSCREEN_ID;
     }
 
     @Override
     protected int getSmallId() {
-        return GSYVideoADManager.SMALL_ID;
+        return IJKVideoADManager.SMALL_ID;
     }
 
     @Override
@@ -190,10 +190,10 @@ public class GSYADVideoPlayer extends StandardGSYVideoPlayer {
     }
 
     @Override
-    protected void cloneParams(GSYBaseVideoPlayer from, GSYBaseVideoPlayer to) {
+    protected void cloneParams(IJKBaseVideoPlayer from, IJKBaseVideoPlayer to) {
         super.cloneParams(from, to);
-        GSYADVideoPlayer sf = (GSYADVideoPlayer) from;
-        GSYADVideoPlayer st = (GSYADVideoPlayer) to;
+        IJKADVideoPlayer sf = (IJKADVideoPlayer) from;
+        IJKADVideoPlayer st = (IJKADVideoPlayer) to;
         st.isFirstPrepared = sf.isFirstPrepared;
         st.changeAdUIState();
     }

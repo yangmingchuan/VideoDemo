@@ -8,7 +8,7 @@ import java.util.Map;
  * Created by shuyu on 2016/11/11.
  */
 
-public class GSYModel {
+public class IJKModel {
 
     String url;
 
@@ -24,7 +24,7 @@ public class GSYModel {
 
     String overrideExtension;
 
-    public GSYModel(String url, Map<String, String> mapHeadData, boolean loop, float speed, boolean isCache, File cachePath, String overrideExtension) {
+    public IJKModel(String url, Map<String, String> mapHeadData, boolean loop, float speed, boolean isCache, File cachePath, String overrideExtension) {
         this.url = url;
         this.mapHeadData = mapHeadData;
         this.looping = loop;

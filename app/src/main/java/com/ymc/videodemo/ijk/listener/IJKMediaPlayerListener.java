@@ -1,6 +1,6 @@
 package com.ymc.videodemo.ijk.listener;
 
-public interface GSYMediaPlayerListener {
+public interface IJKMediaPlayerListener {
     void onPrepared();
 
     void onAutoCompletion();

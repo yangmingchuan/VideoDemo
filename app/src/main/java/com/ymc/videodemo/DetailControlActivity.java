@@ -7,10 +7,10 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.ymc.videodemo.ijk.GSYBaseActivityDetail;
-import com.ymc.videodemo.ijk.builder.GSYVideoOptionBuilder;
+import com.ymc.videodemo.ijk.IJKBaseActivityDetail;
+import com.ymc.videodemo.ijk.builder.IJKVideoOptionBuilder;
 import com.ymc.videodemo.ijk.listener.LockClickListener;
-import com.ymc.videodemo.ijk.video.StandardGSYVideoPlayer;
+import com.ymc.videodemo.ijk.video.StandardIJKVideoPlayer;
 
 /**
  * sampleVideo支持全屏与非全屏切换的清晰度，旋转，镜像等功能.
@@ -19,7 +19,7 @@ import com.ymc.videodemo.ijk.video.StandardGSYVideoPlayer;
  * <p>
  * Created by guoshuyu on 2017/6/18.
  */
-public class DetailControlActivity extends GSYBaseActivityDetail<StandardGSYVideoPlayer> {
+public class DetailControlActivity extends IJKBaseActivityDetail<StandardIJKVideoPlayer> {
 
     private String url = "http://mp4.vjshi.com/2013-05-28/2013052815051372.mp4";
 
@@ -43,16 +43,16 @@ public class DetailControlActivity extends GSYBaseActivityDetail<StandardGSYVide
     }
 
     @Override
-    public StandardGSYVideoPlayer getGSYVideoPlayer() {
+    public StandardIJKVideoPlayer getGSYVideoPlayer() {
         return detailPlayer;
     }
 
     @Override
-    public GSYVideoOptionBuilder getGSYVideoOptionBuilder() {
+    public IJKVideoOptionBuilder getGSYVideoOptionBuilder() {
         //内置封面可参考SampleCoverVideo
         ImageView imageView = new ImageView(this);
         loadCover(imageView, url);
-        return new GSYVideoOptionBuilder()
+        return new IJKVideoOptionBuilder()
                 .setThumbImageView(imageView)
                 .setUrl(url)
                 .setCacheWithPlay(true)
