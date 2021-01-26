@@ -4,18 +4,13 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.ymc.videodemo.ijk.GSYBaseActivityDetail;
 import com.ymc.videodemo.ijk.builder.GSYVideoOptionBuilder;
-import com.ymc.videodemo.ijk.listener.GSYVideoGifSaveListener;
 import com.ymc.videodemo.ijk.listener.LockClickListener;
-import com.ymc.videodemo.ijk.utils.GifCreateHelper;
 import com.ymc.videodemo.ijk.video.StandardGSYVideoPlayer;
-
-import java.io.File;
 
 /**
  * sampleVideo支持全屏与非全屏切换的清晰度，旋转，镜像等功能.
@@ -28,7 +23,6 @@ public class DetailControlActivity extends GSYBaseActivityDetail<StandardGSYVide
 
     private String url = "http://mp4.vjshi.com/2013-05-28/2013052815051372.mp4";
 
-    private GifCreateHelper mGifCreateHelper;
     private SampleControlVideo detailPlayer;
     private View loadingView;
     private float speed = 1;
@@ -42,7 +36,6 @@ public class DetailControlActivity extends GSYBaseActivityDetail<StandardGSYVide
 
         resolveNormalVideoUI();
         initVideoBuilderMode();
-        initGifHelper();
 
         detailPlayer.setLockClickListener(new LockClickListener() {
             @Override
@@ -89,7 +82,6 @@ public class DetailControlActivity extends GSYBaseActivityDetail<StandardGSYVide
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mGifCreateHelper.cancelTask();
     }
 
 
@@ -134,25 +126,6 @@ public class DetailControlActivity extends GSYBaseActivityDetail<StandardGSYVide
     }
 
     /*******************************竖屏全屏结束************************************/
-
-    private void initGifHelper() {
-        mGifCreateHelper = new GifCreateHelper(detailPlayer, new GSYVideoGifSaveListener() {
-            @Override
-            public void result(boolean success, File file) {
-                detailPlayer.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        loadingView.setVisibility(View.GONE);
-                        Toast.makeText(detailPlayer.getContext(), "创建成功", Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
-
-            @Override
-            public void process(int curPosition, int total) {
-            }
-        });
-    }
 
     private void loadCover(ImageView imageView, String url) {
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
